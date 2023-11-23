@@ -1,0 +1,117 @@
+<app-adminnav></app-adminnav>
+<div class="container mt-5">
+  <p style="font-size: 20px;font-weight: bold;">Campings</p>
+  <form (ngSubmit)="onSubmit(campingForm)" #campingForm="ngForm">
+    <div class="form-outline mb-3">
+      <label class="form-label" for="username">Camping Name</label>
+      <input
+        type="text"
+        id="username"
+        class="form-control"
+        placeholder="Enter Name"
+        name="campingName"
+        ngModel
+        required
+        pattern="^[a-zA-Z\- ']+$"
+        minlength="5"
+        #modelName="ngModel"
+        [ngClass]="
+          modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+        "
+      />
+      <div>
+        <p
+          *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
+          class="text-danger"
+        >
+          Please enter name of length
+          {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
+        </p>
+        <p
+          *ngIf="modelName?.errors?.['required'] && modelName.dirty"
+          class="text-danger"
+        >
+          Please enter Name
+        </p>
+        <p *ngIf="modelName?.errors?.['pattern']" class="text-danger">
+          Name should contain only alphabets
+        </p>
+      </div>
+    </div>
+
+    <div class="form-outline mb-3">
+      <label class="form-label" for="name">Description</label>
+      <textarea
+        class="form-control"
+        placeholder="Enter Description"
+        name="description"
+        ngModel
+        required
+        minlength="50"
+        #modelDescription="ngModel"
+        [ngClass]="
+        modelDescription.invalid && modelDescription.dirty ? 'is-invalid' : ''
+        "
+      ></textarea>
+      <div>
+        <p
+          *ngIf="modelDescription?.errors?.['minlength']?.['requiredLength']&& modelDescription.dirty "
+          class="text-danger"
+        >
+          Please enter description of length
+          {{modelDescription?.errors?.['minlength']?.['requiredLength'] | json}}
+        </p>
+        <p
+          *ngIf="modelDescription?.errors?.['required'] && modelDescription.dirty"
+          class="text-danger"
+        >
+          Please enter description
+        </p>
+      </div>
+    </div>
+    <div class="form-outline mb-3">
+      <label class="form-label" for="username">Photo</label>
+      <input
+        type="text"
+        id="username"
+        class="form-control"
+        placeholder="Enter photo link"
+      />
+    </div>
+    <div class="d-grid gap-2 mb-5">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        routerLink="/admincampings"
+        [disabled]="campingForm.invalid"
+      >
+        Add
+      </button>
+    </div>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Camping Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody  *ngFor="let camp of campingList">
+      <tr>
+        <td class="col-2">{{camp.id}}</td>
+        <td class="col-2">Image</td>
+        <td class="col-2">{{camp.campingName}}</td>
+        <td class="col-2 text-wrap">{{camp.description}}</td>
+
+        <td class="col-2">
+          <div><div class="btn btn-success me-2">Edit</div>
+          <div class="btn btn-danger" (click)="deleteCamping(camp.id)">Remove</div>
+        </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

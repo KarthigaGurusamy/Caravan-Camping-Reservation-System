@@ -1,0 +1,63 @@
+
+.navbar {
+    background-color: transparent;
+    position: absolute;
+}
+
+.navbar-brand {
+    color: #eef2ff;
+}
+
+.navbar-nav .nav-link {
+    color: #eef2ff !important; 
+}
+
+
+.about {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 75px;
+    font-weight: bold;
+    color: #eef2ff;
+    letter-spacing: 3px;
+}
+.photo {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: #eef2ff;
+    letter-spacing: 3px;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card:hover .card-overlay {
+    opacity: 1;
+}
+

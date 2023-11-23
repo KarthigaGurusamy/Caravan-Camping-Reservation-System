@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+
+<div class="image-container">
+  <img
+    src="../../../assets/images/location.jpg"
+    style="width: 100%; height: 650px"
+  />
+  <div class="slogan">Locations</div>
+</div>
+
+<section>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="conatiner d-flex" *ngFor="let location of locationList">
+        <div class="col-md-6 m-2">
+          <div class="card">
+            <img
+              src="../../../assets/images/img1.jpg"
+              class="card-img-top"
+              alt="Accommodation Image 1"
+              style="height: 300px"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 m-2">
+          <div class="details">
+            <h3>{{ location.address }}</h3>
+            <p>Price: {{ location.price }} per night</p>
+            <p>Caravan Name: {{ location.caravanName }}</p>
+            <p>Caravan Capacity: {{ location.caravanCapacity }}</p>
+            <p>Stay Count: {{ location.stayCount }}</p>
+            <p *ngIf="isStaff(location.id)">Staff Name: {{getStaff(location.id)}}</p>
+            <button
+              class="btn btn-primary"
+              (click)="playAnimation()"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-bs-whatever="@mdo"
+            >
+              Book Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Choose Camping dates to check availability
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">From Date</label>
+          <input type="date" class="form-control" id="recipient-name" />
+        </div>
+        <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">To Date</label>
+          <input type="date" class="form-control" id="recipient-name" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Check</button>
+      </div>
+    </div>
+  </div>
+</div>

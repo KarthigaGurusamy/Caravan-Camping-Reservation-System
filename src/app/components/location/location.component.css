@@ -1,0 +1,33 @@
+.navbar {
+  background-color: transparent;
+  position: absolute;
+}
+
+.navbar-brand {
+  color: #eef2ff;
+}
+
+.navbar-nav .nav-link {
+  color: #eef2ff !important;
+}
+
+.slogan {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 75px;
+  font-weight: bold;
+  color: #eef2ff;
+  letter-spacing: 3px;
+}
+
+.transition-div {
+  transition: transform 5s ease;
+}
+
+.row:hover .transition-div {
+  transform: scale(1.02);
+  opacity: 0.8;
+}
+

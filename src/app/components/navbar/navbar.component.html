@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top ms-4 me-4 mt-4">
+    <a class="navbar-brand" href="#">
+      <img
+        src="../../../assets/logo/campzo2.png"
+        width="30"
+        height="30"
+        class="d-inline-block align-top"
+        alt="Logo"
+      />
+      <span style="letter-spacing: 2px"> CampZo</span>
+    </a>
+  
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/gallery">Gallery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact">Contact Us </a>
+        </li>
+        <li class="nav-item" *ngIf="!loggedInUser()">
+          <a class="nav-link" routerLink="/login" 
+            >Login | Signup</a
+          >
+        </li>
+        <li class="nav-item" style="cursor: pointer;" *ngIf="loggedInUser()">
+          <a class="nav-link"  (click)="logout()" 
+            >Logout</a
+          >
+        </li>
+        <li class="nav-item" style="cursor: pointer;" *ngIf="loggedInUser()">
+          <a class="nav-link"  routerLink="/userhome" 
+            >Profile</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,84 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { RegisterComponent } from './components/register/register.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { LocationComponent } from './components/location/location.component';
+import { AdminpageComponent } from './components/adminpage/adminpage.component';
+import { UserpageComponent } from './components/userpage/userpage.component';
+import { AdmincampingComponent } from './components/admincamping/admincamping.component';
+import { AdminlocationComponent } from './components/adminlocation/adminlocation.component';
+import { CampingformComponent } from './components/campingform/campingform.component';
+import { LocationformComponent } from './components/locationform/locationform.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { AdminnavComponent } from './components/adminnav/adminnav.component';
+import { UserbookingsComponent } from './components/userbookings/userbookings.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { LoaderInterceptorService } from './service/interceptor/loaderInterceptor.service';
+import { AuthInterceptorService } from './service/interceptor/authInterceptor.service';
+import { UsernavComponent } from './components/usernav/usernav.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { StaffformComponent } from './components/staffform/staffform.component';
+
+export function playerFactory() {
+  return player;
+}
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    GalleryComponent,
+    AboutComponent,
+    ContactComponent,
+    LocationComponent,
+    AdminpageComponent,
+    UserpageComponent,
+    AdmincampingComponent,
+    AdminlocationComponent,
+    CampingformComponent,
+    LocationformComponent,
+    FooterComponent,
+    AdminnavComponent,
+    UserbookingsComponent,
+    BookingsComponent,
+    UserprofileComponent,
+    NavbarComponent,
+    UsernavComponent,
+    StaffComponent,
+    StaffformComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    LottieModule.forRoot({ player: playerFactory })
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoaderInterceptorService,
+    multi: true,
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true,
+  },],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

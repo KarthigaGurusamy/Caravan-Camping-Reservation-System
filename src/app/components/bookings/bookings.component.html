@@ -1,0 +1,36 @@
+<app-adminnav></app-adminnav>
+<div class="container mt-5">
+  <p style="font-size: 20px; font-weight: bold">Bookings</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Image</th>
+        <th scope="col">Camping Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Name</th>
+        <th scope="col">From Date</th>
+        <th scope="col">To Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Payment Status</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let booking of bookingList">
+      <tr>
+        <td>{{ booking.id }}</td>
+        <td>Image</td>
+        <td>{{ booking.campingName }}</td>
+        <td>{{ booking.address }}</td>
+        <td>{{ booking.userName }}</td>
+        <td>{{ booking.name }}</td>
+        <td>{{ booking.fromDate }}</td>
+        <td>{{ booking.toDate }}</td>
+
+        <td>Status</td>
+        <td>Payment Status</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

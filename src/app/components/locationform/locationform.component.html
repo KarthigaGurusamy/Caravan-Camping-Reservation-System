@@ -1,0 +1,221 @@
+<app-adminnav></app-adminnav>
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-6">
+        <h2 class="display-4 text-primary">Add Location</h2>
+        <form (ngSubmit)="onSubmit(locationForm)" #locationForm="ngForm">
+
+          <!-- <div class="form-outline mb-3">
+            <label class="form-label" for="username">Location Name</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Enter Location Name"
+              name="name"
+              ngModel
+              required
+              pattern="^[a-zA-Z\- ']+$"
+              minlength="5"
+              #modelName="ngModel"
+              [ngClass]="
+                modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+              <p
+                *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
+                class="text-danger"
+              >
+                Please enter name of length
+                {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
+              </p>
+              <p
+                *ngIf="modelName?.errors?.['required'] && modelName.dirty"
+                class="text-danger"
+              >
+                Please enter Name
+              </p>
+              <p *ngIf="modelName?.errors?.['pattern']" class="text-danger">
+                Name should contain only alphabets
+              </p>
+            </div>
+          </div> -->
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Caravan Name</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Enter Caravan Name"
+              name="caravanName"
+              ngModel
+              required
+              minlength="5"
+              #modelCaravanName="ngModel"
+              [ngClass]="
+              modelCaravanName.invalid && modelCaravanName.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+              <p
+                *ngIf="modelCaravanName?.errors?.['minlength']?.['requiredLength']&& modelCaravanName.dirty "
+                class="text-danger"
+              >
+                Please enter caravan name of length
+                {{modelCaravanName?.errors?.['minlength']?.['requiredLength'] | json}}
+              </p>
+              <p
+                *ngIf="modelCaravanName?.errors?.['required'] && modelCaravanName.dirty"
+                class="text-danger"
+              >
+                Please enter caravan Name
+              </p>
+              <p *ngIf="modelCaravanName?.errors?.['pattern']" class="text-danger">
+                Caravan Name should contain only alphabets
+              </p>
+            </div>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Caravan Capacity</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Caravan capacity"
+              name="caravanCapacity"
+              ngModel
+              required
+              pattern="^[1-9]\d*$"
+              #modelCapacity="ngModel"
+              [ngClass]="
+              modelCapacity.invalid && modelCapacity.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+             
+              <p
+                *ngIf="modelCapacity?.errors?.['required'] && modelCapacity.dirty"
+                class="text-danger"
+              >
+                Please enter Caravan capacity
+              </p>
+              <p *ngIf="modelCapacity?.errors?.['pattern']" class="text-danger">
+                Capacity should contain only numbers greater than zero
+              </p>
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Price</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Price"
+              name="price"
+              ngModel
+              required
+              pattern="^[1-9]\d*$"
+              #modelPrice="ngModel"
+              [ngClass]="
+              modelPrice.invalid && modelPrice.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+             
+              <p
+                *ngIf="modelPrice?.errors?.['required'] && modelPrice.dirty"
+                class="text-danger"
+              >
+                Please enter Caravan capacity
+              </p>
+              <p *ngIf="modelPrice?.errors?.['pattern']" class="text-danger">
+                Price should contain only numbers greater than zero
+              </p>
+            </div>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Stay count</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Stay count"
+              name="stayCount"
+              ngModel
+              required
+              pattern="^[1-9]\d*$"
+              #modelCount="ngModel"
+              [ngClass]="
+              modelCount.invalid && modelCount.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+             
+              <p
+                *ngIf="modelCount?.errors?.['required'] && modelCount.dirty"
+                class="text-danger"
+              >
+                Please enter Stay Count
+              </p>
+              <p *ngIf="modelCount?.errors?.['pattern']" class="text-danger">
+                Stay count should contain only numbers greater than zero
+              </p>
+            </div>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="name">Address</label>
+            <textarea
+              class="form-control"
+              placeholder="Enter Address"
+              name="address"
+              ngModel
+              required
+              minlength="20"
+              #modelAddress="ngModel"
+              [ngClass]="
+              modelAddress.invalid && modelAddress.dirty ? 'is-invalid' : ''
+              "
+            ></textarea>
+            <div>
+              <p
+                *ngIf="modelAddress?.errors?.['minlength']?.['requiredLength']&& modelAddress.dirty "
+                class="text-danger"
+              >
+                Please enter address of length
+                {{modelAddress?.errors?.['minlength']?.['requiredLength'] | json}}
+              </p>
+              <p
+                *ngIf="modelAddress?.errors?.['required'] && modelAddress.dirty"
+                class="text-danger"
+              >
+                Please enter description
+              </p>
+            
+            </div>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Photo</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Enter photo link"
+            />
+          </div>
+
+          <div class="d-grid gap-2 mb-5">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="locationForm.invalid"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

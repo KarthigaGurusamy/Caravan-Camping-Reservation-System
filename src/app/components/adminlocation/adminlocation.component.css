@@ -1,0 +1,91 @@
+nav {
+  width: 220px;
+  height: 100vh;
+  background: #1e1b4b;
+  padding-top: 30px;
+  position: fixed;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  padding: 20px 45px;
+  font: bold;
+  font-size: 15px;
+  list-style-type: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+nav > ul > li {
+  color: #eef2ff;
+}
+
+nav > ul > li:hover {
+  background: #c7d2fe;
+  color: #1e1b4b;
+  box-shadow: -3px 2px 3px rgba(0, 0, 0, 0.2);
+  animation: menu-hover 300ms forwards;
+}
+
+li:hover > ul.drop-menu {
+  width: 220px;
+  height: 100vh;
+  margin: 0;
+  background: #57b196;
+  position: absolute;
+  z-index: -1;
+  animation: dropdown 300ms ease-out forwards;
+  top: 0;
+  cursor: auto;
+}
+
+.offset {
+  margin-left: 220px;
+}
+
+@keyframes menu-hover {
+  0% {
+    width: 220px;
+  }
+  100% {
+    width: 230px;
+  }
+}
+
+
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card:hover .card-overlay {
+  opacity: 1;
+}

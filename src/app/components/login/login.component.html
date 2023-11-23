@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top ms-4 me-4 mt-4" style="position: absolute;">
+  <a class="navbar-brand" href="#">
+    <img
+      src="../../../assets/logo/campzo2.png"
+      width="30"
+      height="30"
+      class="d-inline-block align-top"
+      alt="Logo"
+    />
+    <span style="letter-spacing: 2px;color: #1e1b4b;"> CampZo</span>
+  </a>
+</nav>
+
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-6">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+      <div class="col-6">
+        <h2 class="display-4 text-primary">Login</h2>
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              ngModel
+              required
+              minlength="4"
+              #modelUsername="ngModel"
+              [ngClass]="
+                modelUsername.invalid && modelUsername.dirty ? 'is-invalid' : ''
+              "
+            />
+            <p
+              *ngIf="modelUsername.invalid && modelUsername.dirty && modelUsername?.errors?.['pattern']"
+              class="text-danger"
+            >
+              Please enter valid username
+            </p>
+          </div>
+
+          <div class="form-outline mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              ngModel
+              required
+              minlength="3"
+              #modelPassword="ngModel"
+              [ngClass]="
+                modelPassword.invalid && modelPassword.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+              <p
+                *ngIf="modelPassword?.errors?.['minlength'] && modelPassword.dirty"
+                class="text-danger"
+              >
+                Please enter minimum password of length
+                {{modelPassword?.errors?.['minlength']?.['requiredLength']}}
+              </p>
+              <p
+                *ngIf="modelPassword?.errors?.['required'] && modelPassword.dirty"
+                class="text-danger"
+              >
+                Please enter password!
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center mb-4">
+            <span>Not registered?</span>
+            <a
+              routerLink="/register"
+              class="text-primary text-decoration-none px-2"
+              >Register here</a
+            >
+          </div>
+
+          <div class="d-grid gap-2">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="!loginForm.valid"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
