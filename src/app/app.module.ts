@@ -16,8 +16,6 @@ import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { AdmincampingComponent } from './components/admincamping/admincamping.component';
 import { AdminlocationComponent } from './components/adminlocation/adminlocation.component';
-import { CampingformComponent } from './components/campingform/campingform.component';
-import { LocationformComponent } from './components/locationform/locationform.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminnavComponent } from './components/adminnav/adminnav.component';
 import { UserbookingsComponent } from './components/userbookings/userbookings.component';
@@ -31,6 +29,7 @@ import { AuthInterceptorService } from './service/interceptor/authInterceptor.se
 import { UsernavComponent } from './components/usernav/usernav.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { StaffformComponent } from './components/staffform/staffform.component';
+import { BookingformComponent } from './components/bookingform/bookingform.component';
 
 export function playerFactory() {
   return player;
@@ -50,8 +49,6 @@ export function playerFactory() {
     UserpageComponent,
     AdmincampingComponent,
     AdminlocationComponent,
-    CampingformComponent,
-    LocationformComponent,
     FooterComponent,
     AdminnavComponent,
     UserbookingsComponent,
@@ -60,7 +57,8 @@ export function playerFactory() {
     NavbarComponent,
     UsernavComponent,
     StaffComponent,
-    StaffformComponent
+    StaffformComponent,
+    BookingformComponent
   ],
   imports: [
     BrowserModule,

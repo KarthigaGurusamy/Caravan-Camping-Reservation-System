@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-userprofile',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent {
-
+  options: AnimationOptions = {
+    path: '/assets/profile.json',
+  };
 }

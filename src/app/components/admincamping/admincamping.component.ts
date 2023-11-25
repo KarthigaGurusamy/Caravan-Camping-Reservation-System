@@ -12,6 +12,15 @@ import { CampingService } from 'src/app/service/camping.service';
 export class AdmincampingComponent implements OnInit {
   campingList: Camping[] = [];
 
+  camping: Camping = {
+    id: 0,
+    campingName: '',
+    description: '',
+  };
+
+  button: String = 'Add';
+  editId: number = 0;
+
   constructor(private campingService: CampingService) {}
 
   ngOnInit(): void {
@@ -30,11 +39,17 @@ export class AdmincampingComponent implements OnInit {
 
   error: string = '';
   onSubmit(campingForm: NgForm) {
-    console.log(campingForm.value);
-    this.campingService.addCampings(campingForm.value).subscribe({
+    let camp: Camping = {
+      id: this.editId,
+      campingName: campingForm.value.campingName,
+      description: campingForm.value.description,
+    };
+    this.campingService.addCampings(camp).subscribe({
       next: (response: AppResponse) => {
         this.campingList = response.data;
         campingForm.reset();
+        this.editId = 0;
+        this.button = 'Add';
       },
       complete: () => {},
       error: (error: Error) => {
@@ -44,7 +59,27 @@ export class AdmincampingComponent implements OnInit {
     });
   }
 
-  deleteCamping(id:number):void{
+  editCamping(id: number, campingForm: NgForm): void {
+    this.campingService.getCampingById(id).subscribe({
+      next: (response: AppResponse) => {
+        let value: Camping = {
+          id: response.data.id,
+          campingName: response.data.campingName,
+          description: response.data.description,
+        };
+        campingForm.resetForm(value);
+        this.button = 'Edit';
+        this.editId = response.data.id;
+      },
+      complete: () => {},
+      error: (error: Error) => {
+        console.log('Message:', error.message);
+        console.log('Name:', error.name);
+      },
+    });
+  }
+
+  deleteCamping(id: number): void {
     this.campingService.deleteCamping(id).subscribe({
       next: (response: AppResponse) => {
         this.campingList = response.data;

@@ -24,7 +24,7 @@ export class StaffformComponent {
 
     this.staffService.addStaff(staff).subscribe({
       next: (response: AppResponse) => {
-        this.router.navigate(['/staff'],{ replaceUrl: true });
+        this.router.navigate(['/admin/staff'],{ replaceUrl: true });
       },
       complete: () => {},
       error: (error: Error) => {

@@ -5,11 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 import { AppUser } from '../model/appUser';
+import { Userbooking } from '../model/userbooking';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingsService {
+
 
   constructor(private httpClient: HttpClient, private storageService:StorageService) {}
 
@@ -26,6 +28,11 @@ export class BookingsService {
 
   deleteBooking(id:number) : Observable<AppResponse>{
     return this.httpClient.delete<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/delete/${id}`);
+
+  }
+
+  addUserBooking(booking: Userbooking) {
+    return this.httpClient.post<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/create`,booking);
 
   }
 }

@@ -11,13 +11,12 @@ import { AdminpageComponent } from './components/adminpage/adminpage.component';
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { AdmincampingComponent } from './components/admincamping/admincamping.component';
 import { AdminlocationComponent } from './components/adminlocation/adminlocation.component';
-import { CampingformComponent } from './components/campingform/campingform.component';
-import { LocationformComponent } from './components/locationform/locationform.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { UserbookingsComponent } from './components/userbookings/userbookings.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { StaffformComponent } from './components/staffform/staffform.component';
+import { BookingformComponent } from './components/bookingform/bookingform.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -27,17 +26,17 @@ const routes: Routes = [
   {path:'about',component:AboutComponent},
   {path:'contact',component:ContactComponent},
   {path:'location',component:LocationComponent},
-  {path:'adminhome',component:AdminpageComponent},
-  {path:'userhome',component:UserpageComponent},
-  {path:'admincampings',component:AdmincampingComponent},
-  {path:'adminlocations',component:AdminlocationComponent},
-  {path:'campingform',component:CampingformComponent},
-  {path:'locationform',component:LocationformComponent},
-  {path:'bookings',component:BookingsComponent},
-  {path:'userbookings',component:UserbookingsComponent},
-  {path:'profile',component:UserprofileComponent},
-  {path:'staff',component:StaffComponent},
-  {path:'staffform',component:StaffformComponent},
+  {path:'admin/home',component:AdminpageComponent},
+  {path:'user/home',component:UserpageComponent},
+  {path:'admin/campings',component:AdmincampingComponent},
+  {path:'admin/locations',component:AdminlocationComponent},
+  {path:'admin/bookings',component:BookingsComponent},
+  {path:'user/bookings',component:UserbookingsComponent},
+  {path:'user/profile',component:UserprofileComponent},
+  {path:'admin/staff',component:StaffComponent},
+  {path:'admin/staff/form',component:StaffformComponent},
+  {path:'user/booking/form',component:BookingformComponent},
+
 
 
 ];

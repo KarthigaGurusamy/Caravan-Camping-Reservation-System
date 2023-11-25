@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppResponse } from 'src/app/model/appResponse';
 import { Camping } from 'src/app/model/camping';
 import { CampingService } from 'src/app/service/camping.service';
@@ -12,7 +13,7 @@ export class HomeComponent {
 
   campingList : Camping[]=[];
 
-  constructor(private campingService : CampingService){}
+  constructor(private campingService : CampingService, private router:Router){}
 
   ngOnInit(): void {
     this.campingService.getHomeCampings().subscribe({
@@ -27,6 +28,11 @@ export class HomeComponent {
         console.log('Name:', error.name);
       },
     });
+  }
+
+  getHomeLocations(id:number)
+  {
+    this.router.navigate(['/location'],{queryParams:{id:id}});
   }
 
 }

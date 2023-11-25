@@ -9,26 +9,43 @@ import { Camping } from '../model/camping';
   providedIn: 'root',
 })
 export class CampingService {
- 
   constructor(private httpClient: HttpClient) {}
 
   getCampings(): Observable<AppResponse> {
-    
-    return this.httpClient.get<AppResponse>(`${urlEndpoint.baseUrl}/admin/camping/all`);
+    return this.httpClient.get<AppResponse>(
+      `${urlEndpoint.baseUrl}/admin/camping/all`
+    );
   }
 
   getHomeCampings(): Observable<AppResponse> {
-    
-    return this.httpClient.get<AppResponse>(`${urlEndpoint.baseUrl}/home/camping/all`);
+    return this.httpClient.get<AppResponse>(
+      `${urlEndpoint.baseUrl}/home/camping/all`
+    );
   }
 
-  addCampings(camping:Camping) : Observable<AppResponse>{
-    return this.httpClient.post<AppResponse>(`${urlEndpoint.baseUrl}/admin/camping/create`,camping);
-
+  addCampings(camping: Camping): Observable<AppResponse> {
+    if (camping.id === 0) {
+      return this.httpClient.post<AppResponse>(
+        `${urlEndpoint.baseUrl}/admin/camping/create`,
+        camping
+      );
+    } else {
+      return this.httpClient.put<AppResponse>(
+        `${urlEndpoint.baseUrl}/admin/camping/update`,
+        camping
+      );
+    }
   }
 
-  deleteCamping(id:number) : Observable<AppResponse>{
-    return this.httpClient.delete<AppResponse>(`${urlEndpoint.baseUrl}/admin/camping/delete/${id}`);
+  deleteCamping(id: number): Observable<AppResponse> {
+    return this.httpClient.delete<AppResponse>(
+      `${urlEndpoint.baseUrl}/admin/camping/delete/${id}`
+    );
+  }
 
+  getCampingById(id: number): Observable<AppResponse> {
+    return this.httpClient.get<AppResponse>(
+      `${urlEndpoint.baseUrl}/admin/camping/${id}`
+    );
   }
 }

@@ -45,8 +45,10 @@ export class AuthService {
       );
   }
   register(user: AppUser): Observable<AppResponse> {
-    return this.http
-      .post<AppResponse>(`${urlEndpoint.baseUrl}/auth/register`, user);
+    return this.http.post<AppResponse>(
+      `${urlEndpoint.baseUrl}/auth/register`,
+      user
+    );
   }
 
   logout() {
@@ -70,10 +72,19 @@ export class AuthService {
     this.isLoggedInSubject.next(true);
 
     if (user.role === CONSTANT.USER) {
-      this.router.navigate(['/userhome'], { replaceUrl: true });
+      this.router.navigate(['/'], { replaceUrl: true });
     } else if (user.role === CONSTANT.ADMIN) {
       this.isAdminSubject.next(true);
-      this.router.navigate(['/adminhome'], { replaceUrl: true });
+      this.router.navigate(['/'], { replaceUrl: true });
+    }
+  }
+
+  isAdminLoggedIn(): boolean {
+    let user: AppUser = this.storageService.getLoggedInUser();
+    if (user.role === CONSTANT.ADMIN) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

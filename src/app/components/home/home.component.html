@@ -37,7 +37,7 @@
 
           />
           <div class="card-overlay">
-            <button class="btn btn-primary" routerLink="/location">{{camping.campingName}}</button>
+            <button class="btn btn-primary" (click)="getHomeLocations(camping.id)">{{camping.campingName}}</button>
           </div>
         </div>
       </div>

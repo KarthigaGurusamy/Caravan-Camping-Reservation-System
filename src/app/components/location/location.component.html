@@ -29,16 +29,97 @@
             <p>Caravan Name: {{ location.caravanName }}</p>
             <p>Caravan Capacity: {{ location.caravanCapacity }}</p>
             <p>Stay Count: {{ location.stayCount }}</p>
-            <p *ngIf="isStaff(location.id)">Staff Name: {{getStaff(location.id)}}</p>
+            <p *ngIf="isStaff(location.id)">
+              Staff Name: {{ getStaff(location.id) }}
+            </p>
+            <p style="color: red">
+              {{
+                loggedInUser() ? "" : "Please log in to book camping location"
+              }}
+            </p>
             <button
               class="btn btn-primary"
               (click)="playAnimation()"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
               data-bs-whatever="@mdo"
+              [disabled]="!loggedInUser()"
             >
               Book Now
             </button>
+          </div>
+        </div>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Choose Camping dates
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form
+                (ngSubmit)="onSubmit(bookingForm, location.id)"
+                #bookingForm="ngForm"
+              >
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label"
+                      >From Date</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="fromDate"
+                      name="fromDate"
+                      ngModel
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label"
+                      >To Date</label
+                    >
+                    <input
+                      type="date"
+                      class="form-control"
+                      id="toDate"
+                      name="toDate"
+                      ngModel
+                    />
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <!-- <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal"
+                  >
+                    Confirm
+                  </button> -->
+                  <button
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                    routerLink="/user/booking/form"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -46,21 +127,19 @@
   </div>
 </section>
 
-<app-footer></app-footer>
-
 <div
   class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  id="exampleModalToggle2"
   aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel2"
+  tabindex="-1"
 >
-  <div class="modal-dialog">
+  <div
+    class="modal-dialog modal-dialog-centered"
+    style="height: 300px; width: 300px"
+  >
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Choose Camping dates to check availability
-        </h1>
         <button
           type="button"
           class="btn-close"
@@ -69,18 +148,10 @@
         ></button>
       </div>
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="recipient-name" class="col-form-label">From Date</label>
-          <input type="date" class="form-control" id="recipient-name" />
-        </div>
-        <div class="mb-3">
-          <label for="recipient-name" class="col-form-label">To Date</label>
-          <input type="date" class="form-control" id="recipient-name" />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Check</button>
+        <ng-lottie [options]="options" *ngIf="loggedInUser()"></ng-lottie>
       </div>
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

@@ -2,6 +2,7 @@
 <div class="container mt-5">
   <p style="font-size: 20px;font-weight: bold;">Campings</p>
   <form (ngSubmit)="onSubmit(campingForm)" #campingForm="ngForm">
+    <input type="hidden" id="id" name="id">
     <div class="form-outline mb-3">
       <label class="form-label" for="username">Camping Name</label>
       <input
@@ -82,10 +83,10 @@
       <button
         type="submit"
         class="btn btn-primary"
-        routerLink="/admincampings"
+        routerLink="/admin/campings"
         [disabled]="campingForm.invalid"
       >
-        Add
+      {{button}}
       </button>
     </div>
   </form>
@@ -107,7 +108,7 @@
         <td class="col-2 text-wrap">{{camp.description}}</td>
 
         <td class="col-2">
-          <div><div class="btn btn-success me-2">Edit</div>
+          <div><div class="btn btn-success me-2" (click)="editCamping(camp.id,campingForm)">Edit</div>
           <div class="btn btn-danger" (click)="deleteCamping(camp.id)">Remove</div>
         </div>
         </td>

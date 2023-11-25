@@ -12,6 +12,4 @@ export interface Bookings {
   stayCount: number;
   campingName: String;
   description: String;
-//   campingPhoto: null;
-//   locationPhoto: null;
 }
