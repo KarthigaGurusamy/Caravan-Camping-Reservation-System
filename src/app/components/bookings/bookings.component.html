@@ -12,7 +12,6 @@
         <th scope="col">Name</th>
         <th scope="col">From Date</th>
         <th scope="col">To Date</th>
-        <th scope="col">Status</th>
         <th scope="col">Payment Status</th>
       </tr>
     </thead>
@@ -27,8 +26,7 @@
         <td>{{ booking.fromDate }}</td>
         <td>{{ booking.toDate }}</td>
 
-        <td>Status</td>
-        <td>Payment Status</td>
+        <td style="color: green;">{{booking.status}}</td>
 
       </tr>
     </tbody>

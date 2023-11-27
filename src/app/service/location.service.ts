@@ -17,20 +17,30 @@ export class LocationService {
     );
   }
 
-  getHomeLocations(id:number): Observable<AppResponse> {
-    return this.httpClient.get<AppResponse>(
-      `${urlEndpoint.baseUrl}/home/camping-location/${id}`
-    );
+  getHomeLocations(id: number): Observable<AppResponse> {
+    console.log(id, 'oustside');
+
+    if (id == 0) {
+      console.log(id, 'location');
+
+      return this.httpClient.get<AppResponse>(
+        `${urlEndpoint.baseUrl}/home/location/all`
+      );
+    } else {
+      return this.httpClient.get<AppResponse>(
+        `${urlEndpoint.baseUrl}/home/camping-location/${id}`
+      );
+    }
   }
 
-  addLocation(location: Location): Observable<AppResponse> {
-    if (location.id === 0) {
+  addLocation(location: FormData, id: number): Observable<AppResponse> {
+    if (id === 0) {
       return this.httpClient.post<AppResponse>(
         `${urlEndpoint.baseUrl}/admin/location/create`,
         location
       );
     } else {
-      console.log(location.id);
+      console.log(id);
       return this.httpClient.put<AppResponse>(
         `${urlEndpoint.baseUrl}/admin/location/update`,
         location

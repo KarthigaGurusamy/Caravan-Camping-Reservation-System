@@ -1,21 +1,100 @@
-<app-navbar></app-navbar>
+<nav
+  class="navbar navbar-expand-lg fixed-top mt-5"
+  style="background-color: transparent; position: absolute"
+>
+  <div class="container">
+    <div>
+      <a class="navbar-brand" href="#">
+        <img
+          src="../../../assets/logo/campzo2.png"
+          width="40"
+          height="40"
+          class="d-inline-block align-top rounded-circle"
+          alt="Logo"
+        />
+        <span style="letter-spacing: 2px; font-size: 25px; color: #db2777">
+          CampZo</span
+        >
+      </a>
+    </div>
 
-<div class="image-container">
-  <img
-    src="../../../assets/images/camp1.jpg"
-    style="width: 100%; height: 650px"
-  />
-  <div class="slogan">Nature's Best, Adventure's Best</div>
-  <div class="search-bar">
-    <div class="cool-search-bar">
-      <input type="text" class="form-control" placeholder="Search here..." />
-      <button class="btn btn-primary ms-2">Explore</button>
+    <div>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a
+            class="nav-link"
+            href="#campZoCampings"
+            style="color: #db2777; cursor: pointer"
+            >Campings</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#campZoLocations"
+            style="color: #db2777; cursor: pointer"
+            >Locations</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#campZoContactUs"
+            style="color: #db2777; cursor: pointer"
+            >Contact Us
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div
+        class="btn login"
+        data-bs-target="#exampleModalToggle"
+        data-bs-toggle="modal"
+        *ngIf="!loggedInUser()"
+      >
+        Login
+      </div>
+      <div
+        class="btn login"
+        *ngIf="isAdmin() && loggedInUser()"
+        routerLink="/admin/home"
+      >
+        Profile
+      </div>
+
+      <div
+        class="btn login"
+        *ngIf="!isAdmin() && loggedInUser()"
+        routerLink="/user/home"
+      >
+        Profile
+      </div>
+      <div class="btn login" *ngIf="loggedInUser()" (click)="logout()">
+        Logout
+      </div>
+      
     </div>
   </div>
+</nav>
+<div class="image-container">
+  <img src="../../../assets/images/bg.jpg" style="width: 100%; height: 650px" />
+  <div class="slogan">
+    Nature's Best, <br />Adventure's Best...!<br />
+    <div class="btn btn-primary login">Explore</div>
+  </div>
 </div>
+
 <section class="mt-5">
+  <marquee width="100%" direction="right" height="50px" style="font-size: 30px;color: #be185d;">
+    Hurry Up! Offers are ahead!!! Make family time with our CampZo!!!.
+  </marquee>
+</section>
+
+<section class="mt-3" id="#campZoCampings">
   <p
-    class="mt-3"
+    class="mt-3 heading"
     style="
       letter-spacing: 1px;
       font-weight: bold;
@@ -27,31 +106,198 @@
   </p>
   <div class="container card-section">
     <div class="row">
-      <div class="col-md-4 mb-4" *ngFor="let camping of campingList">
+      <div class="col-md-4 mb-4">
         <div class="card position-relative">
           <img
             src="../../../assets/images/tentcamping.jpg"
             class="card-img-top"
             alt="Card Image 1"
-            style="height: 300px;"
-
+            style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary" (click)="getHomeLocations(camping.id)">{{camping.campingName}}</button>
+            <button class="btn btn-primary">Tent Camping</button>
           </div>
         </div>
       </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/backpacking.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+            style="height: 300px"
+          />
+          <div class="card-overlay">
+            <button class="btn btn-primary">Back Packing</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/glamping.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+            style="height: 300px"
+          />
+          <div class="card-overlay">
+            <button class="btn btn-primary">Glamping</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/wildcamping.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+            style="height: 300px"
+          />
+          <div class="card-overlay">
+            <button class="btn btn-primary">Wild Camping</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/bicyclecamping.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+            style="height: 300px"
+          />
+          <div class="card-overlay">
+            <button class="btn btn-primary">Bicycle Camping</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/caravan.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+            style="height: 300px"
+          />
+          <div class="card-overlay">
+            <button class="btn btn-primary">Caravan Camping</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="color: red">
+          {{ loggedInUser() ? "" : "Please log in to view campings" }}
+        </p>
+        <button
+          class="btn btn-primary"
+          routerLink="/campings"
+          [disabled]="!loggedInUser()"
+        >
+          View More
+        </button>
+      </div>
     </div>
-  
   </div>
 </section>
 
-<section>
+<section class="mt-5" id="campZoLocations">
+  <div class="container card-section">
+    <div class="row">
+      <p
+        class="mt-3 heading"
+        style="
+          letter-spacing: 1px;
+          font-weight: bold;
+          font-size: 50px;
+          text-align: center;
+        "
+      >
+        Our Locations
+      </p>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/location1.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+          />
+          <div class="card-overlay">Ooty</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/location2.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+          />
+          <div class="card-overlay">Koddaikaanal</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/location3.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+          />
+          <div class="card-overlay">Nilagiri</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/location4.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+          />
+          <div class="card-overlay">Yelagiri</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/location5.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+          />
+          <div class="card-overlay">Vaalpaarai</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card position-relative">
+          <img
+            src="../../../assets/images/location6.jpg"
+            class="card-img-top"
+            alt="Card Image 1"
+          />
+          <div class="card-overlay">Yercaud</div>
+        </div>
+      </div>
+      <div>
+        <p style="color: red">
+          {{ loggedInUser() ? "" : "Please log in to view location" }}
+        </p>
+        <button
+          class="btn btn-primary"
+          (click)="getHomeLocations(0)"
+          [disabled]="!loggedInUser()"
+        >
+          View More
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background-color: #fdf2f8" id="campZoContactUs">
   <div class="container d-flex justify-content-evenly mt-5">
     <div class="container">
       <div>
         <p
-          class="mt-3"
+          class="mt-3 heading"
           style="
             letter-spacing: 1px;
             font-weight: bold;
@@ -66,12 +312,31 @@
           quality, combining our energy and enthusiasm.
         </p>
       </div>
+      <div>
+        <p
+          class="mt-3 heading"
+          style="
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+          "
+        >
+          Social Media
+        </p>
+        <div class="d-flex justify-content-evenly">
+          <i class="fab fa-facebook social-icon"></i>
+          <i class="fab fa-twitter social-icon"></i>
+          <i class="fab fa-instagram social-icon"></i>
+          <i class="fab fa-linkedin social-icon"></i>
+        </div>
+      </div>
     </div>
 
     <div class="container">
       <div>
         <p
-          class="mt-3"
+          class="mt-3 heading"
           style="
             letter-spacing: 1px;
             font-weight: bold;
@@ -96,7 +361,7 @@
     <div class="container">
       <div>
         <p
-          class="mt-3"
+          class="mt-3 heading"
           style="
             letter-spacing: 1px;
             font-weight: bold;
@@ -104,17 +369,342 @@
             text-align: center;
           "
         >
-          Social Media
+          Contact Us
         </p>
-        <div class="d-flex justify-content-evenly">
-          <i class="fab fa-facebook social-icon"></i>
-          <i class="fab fa-twitter social-icon"></i>
-          <i class="fab fa-instagram social-icon"></i>
-          <i class="fab fa-linkedin social-icon"></i>
+        <p></p>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Your Name" />
         </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Your Email" />
+        </div>
+        <div class="input-group mb-3">
+          <textarea class="form-control" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Send Message</button>
       </div>
     </div>
   </div>
 </section>
 
-<app-footer></app-footer>
+<!-- Modals -->
+
+<div
+  class="modal fade modal-lg"
+  id="exampleModalToggle"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container py-5 h-100">
+          <div
+            class="row d-flex align-items-center justify-content-center h-100"
+          >
+            <div class="col-6">
+              <ng-lottie [options]="options"></ng-lottie>
+            </div>
+            <div class="col-6">
+              <h2 class="display-4 text-primary">Login</h2>
+              <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="username"
+                    ngModel
+                    required
+                    minlength="4"
+                    #modelUsername="ngModel"
+                    [ngClass]="
+                      modelUsername.invalid && modelUsername.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <p
+                    *ngIf="modelUsername.invalid && modelUsername.dirty && modelUsername?.errors?.['pattern']"
+                    class="text-danger"
+                  >
+                    Please enter valid username
+                  </p>
+                </div>
+
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="password">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    ngModel
+                    required
+                    minlength="3"
+                    #modelPassword="ngModel"
+                    [ngClass]="
+                      modelPassword.invalid && modelPassword.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <div>
+                    <p
+                      *ngIf="modelPassword?.errors?.['minlength'] && modelPassword.dirty"
+                      class="text-danger"
+                    >
+                      Please enter minimum password of length
+                      {{modelPassword?.errors?.['minlength']?.['requiredLength']}}
+                    </p>
+                    <p
+                      *ngIf="modelPassword?.errors?.['required'] && modelPassword.dirty"
+                      class="text-danger"
+                    >
+                      Please enter password!
+                    </p>
+                  </div>
+                </div>
+
+                <p
+                  class="error"
+                  [ngClass]="error.length > 0 ? 'visible' : 'invisible'"
+                >
+                  {{ error }}
+                </p>
+
+                <div class="d-flex align-items-center mb-4">
+                  <span>Not registered?</span>
+                  <a
+                    style="cursor: pointer"
+                    class="text-primary text-decoration-none px-2"
+                    data-bs-target="#exampleModalToggle2"
+                    data-bs-toggle="modal"
+                    >Register here</a
+                  >
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="!loginForm.valid"
+                    data-bs-dismiss="modal"
+                  >
+                    Login
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade modal-lg"
+  id="exampleModalToggle2"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel2"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div class="col-6">
+            <ng-lottie [options]="register"></ng-lottie>
+          </div>
+          <div class="col-6 me-2">
+            <h2 class="display-4 text-primary">Register</h2>
+            <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">Email</label>
+                <input
+                  type="email"
+                  id="form3Example3"
+                  class="form-control"
+                  name="email"
+                  ngModel
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  required
+                  email
+                  #modelEmail="ngModel"
+                  [ngClass]="
+                    modelEmail.invalid && modelEmail.dirty ? 'is-invalid' : ''
+                  "
+                />
+                <div>
+                  <p
+                    *ngIf="modelEmail.invalid && modelEmail.dirty && modelEmail?.errors?.['pattern']"
+                    class="text-danger"
+                  >
+                    Please enter valid email
+                  </p>
+                  <p
+                    *ngIf="modelEmail.dirty && modelEmail?.errors?.['required']"
+                    class="text-danger"
+                  >
+                    Please enter email
+                  </p>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">Username</label>
+                <input
+                  type="email"
+                  id="form3Example3"
+                  class="form-control"
+                  name="username"
+                  ngModel
+                  required
+                  minlength="4"
+                  #modelUsername="ngModel"
+                  [ngClass]="
+                    modelUsername.invalid && modelUsername.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <p
+                  *ngIf="modelUsername.invalid && modelUsername.dirty && modelUsername?.errors?.['pattern']"
+                  class="text-danger"
+                >
+                  Please enter valid username
+                </p>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">Name</label>
+                <input
+                  type="text"
+                  id="form3Example3"
+                  class="form-control"
+                  name="name"
+                  ngModel
+                  required
+                  pattern="^[a-zA-Z\- ']+$"
+                  minlength="3"
+                  #modelName="ngModel"
+                  [ngClass]="
+                    modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+                  "
+                />
+                <div>
+                  <p
+                    *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
+                    class="text-danger"
+                  >
+                    Please enter name of length
+                    {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
+                  </p>
+                  <p
+                    *ngIf="modelName?.errors?.['required'] && modelName.dirty"
+                    class="text-danger"
+                  >
+                    Please enter Name
+                  </p>
+                  <p *ngIf="modelName?.errors?.['pattern']" class="text-danger">
+                    Name should contain only alphabets
+                  </p>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example4">Password</label>
+                <input
+                  type="password"
+                  id="form3Example4"
+                  class="form-control"
+                  name="password"
+                  ngModel
+                  required
+                  minlength="3"
+                  #modelPassword="ngModel"
+                  [ngClass]="
+                    modelPassword.invalid && modelPassword.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div>
+                  <p
+                    *ngIf="modelPassword?.errors?.['minlength'] && modelPassword.dirty"
+                    class="text-danger"
+                  >
+                    Please enter minimum password of length
+                    {{modelPassword?.errors?.['minlength']?.['requiredLength']}}
+                  </p>
+                  <p
+                    *ngIf="modelPassword?.errors?.['required'] && modelPassword.dirty"
+                    class="text-danger"
+                  >
+                    Please enter password!
+                  </p>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example4"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  id="form3Example4"
+                  class="form-control"
+                  name="confirmpassword"
+                  ngModel
+                  required
+                  minlength="3"
+                  #modelConfirmPassword="ngModel"
+                  [ngClass]="
+                    modelConfirmPassword.dirty &&
+                    modelPassword.value !== modelConfirmPassword.value
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div>
+                  <p
+                    *ngIf="modelConfirmPassword?.errors?.['required'] && modelConfirmPassword.dirty"
+                    class="text-danger"
+                  >
+                    Please enter confirm password!
+                  </p>
+                  <p
+                    *ngIf="
+                      modelPassword.value !== modelConfirmPassword.value &&
+                      modelConfirmPassword.dirty &&
+                      modelConfirmPassword.value
+                    "
+                    class="text-danger"
+                  >
+                    Password mismatch!
+                  </p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-4">
+                <span>Already registered?</span>
+                <a
+                  style="cursor: pointer"
+                  class="text-primary text-decoration-none px-2"
+                  data-bs-target="#exampleModalToggle"
+                  data-bs-toggle="modal"
+                  >Login here</a
+                >
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-block mb-4"
+                [disabled]="registerForm.invalid"
+                data-bs-target="#exampleModalToggle"
+                data-bs-toggle="modal"
+              >
+                Register
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

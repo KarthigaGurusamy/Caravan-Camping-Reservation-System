@@ -4,6 +4,8 @@ import { LocationService } from 'src/app/service/location.service';
 import { Location } from 'src/app/model/location';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Camping } from 'src/app/model/camping';
+import { CampingService } from 'src/app/service/camping.service';
 
 @Component({
   selector: 'app-adminlocation',
@@ -14,10 +16,14 @@ export class AdminlocationComponent {
   locationList: Location[] = [];
   editId: number = 0;
   button: String = 'Add';
+  campingList: Camping[] = [];
+
+  file = '';
 
   constructor(
     private locationService: LocationService,
-    private router: Router
+    private router: Router,
+    private campingService: CampingService
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +31,18 @@ export class AdminlocationComponent {
       next: (response: AppResponse) => {
         this.locationList = response.data;
         console.log(this.locationList);
+
+
+      },
+      complete: () => {},
+      error: (error: Error) => {
+        console.log('Message:', error.message);
+        console.log('Name:', error.name);
+      },
+    });
+    this.campingService.getCampings().subscribe({
+      next: (response: AppResponse) => {
+        this.campingList = response.data;
       },
       complete: () => {},
       error: (error: Error) => {
@@ -35,17 +53,30 @@ export class AdminlocationComponent {
   }
 
   onSubmit(locationForm: NgForm) {
-    let location: Location = {
-      id: this.editId,
-      address: locationForm.value.address,
-      campingId: 1,
-      caravanName: locationForm.value.caravanName,
-      caravanCapacity: parseInt(locationForm.value.caravanCapacity),
-      price: parseFloat(locationForm.value.price),
-      stayCount: parseInt(locationForm.value.stayCount),
-    };
+    console.log(locationForm.value);
+    // let location: Location = {
+    //   id: this.editId,
+    //   address: locationForm.value.address,
+    //   name:locationForm.value.name,
+    //   campingId: parseInt(locationForm.value.campingId),
+    //   caravanName: locationForm.value.caravanName,
+    //   caravanCapacity: parseInt(locationForm.value.caravanCapacity),
+    //   price: parseFloat(locationForm.value.price),
+    //   stayCount: parseInt(locationForm.value.stayCount),
+    // };
 
-    this.locationService.addLocation(location).subscribe({
+    const formData = new FormData();
+    formData.append('photo', this.file);
+    formData.append('id', this.editId.toString());
+    formData.append('address', locationForm.value.address);
+    formData.append('name', locationForm.value.name);
+    formData.append('campingId', locationForm.value.campingId);
+    formData.append('caravanName', locationForm.value.caravanName);
+    formData.append('caravanCapacity', locationForm.value.caravanCapacity);
+    formData.append('price', locationForm.value.price);
+    formData.append('stayCount', locationForm.value.stayCount);
+
+    this.locationService.addLocation(formData, this.editId).subscribe({
       next: (response: AppResponse) => {
         this.locationList = response.data;
         this.editId = 0;
@@ -66,7 +97,8 @@ export class AdminlocationComponent {
         let value: Location = {
           id: response.data.id,
           address: response.data.address,
-          campingId: 1,
+          name: response.data.name,
+          campingId: parseInt(response.data.campingId),
           caravanName: response.data.caravanName,
           caravanCapacity: response.data.caravanCapacity,
           price: response.data.price,
@@ -74,7 +106,7 @@ export class AdminlocationComponent {
         };
         locationForm.resetForm(value);
         this.button = 'Edit';
-        this.editId=response.data.id;
+        this.editId = response.data.id;
       },
       complete: () => {},
       error: (error: Error) => {
@@ -97,8 +129,16 @@ export class AdminlocationComponent {
     });
   }
 
-  reset(locationForm:NgForm)
-  {
+  reset(locationForm: NgForm) {
     locationForm.reset();
+  }
+
+  onFileChange(event: any) {
+    const fileInput = event.target;
+    if (fileInput && fileInput.files.length > 0) {
+      this.file = fileInput.files[0];
+
+      // console.log('Selected file',this.file);
+    }
   }
 }

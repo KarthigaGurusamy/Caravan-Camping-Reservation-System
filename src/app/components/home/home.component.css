@@ -1,21 +1,8 @@
-.navbar {
-  background-color: transparent;
-  position: absolute;
-}
-
-.navbar-brand {
-  color: #eef2ff;
-  
-}
-
-.navbar-nav .nav-link {
-  color: #eef2ff !important;
-}
 
 .slogan {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 25%;
   transform: translate(-50%, -50%);
   font-size: 36px;
   font-weight: bold;

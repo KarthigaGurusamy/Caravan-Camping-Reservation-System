@@ -22,9 +22,7 @@ export class LoginComponent {
   password:String='';
   error:String='';
   onSubmit(loginForm:NgForm) :void
-  {
-    // console.log(loginForm.value.username);
-    
+  {    
     let login: Login = {
       username: loginForm.value.username,
       password: loginForm.value.password,

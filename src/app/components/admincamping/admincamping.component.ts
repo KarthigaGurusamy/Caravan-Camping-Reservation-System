@@ -91,4 +91,9 @@ export class AdmincampingComponent implements OnInit {
       },
     });
   }
+
+  reset(campingForm:NgForm)
+  {
+    campingForm.reset();
+  }
 }

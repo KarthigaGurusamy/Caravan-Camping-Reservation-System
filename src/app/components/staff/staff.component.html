@@ -1,7 +1,31 @@
 <app-adminnav></app-adminnav>
 <div class="container mt-5">
-  <p style="font-size: 20px;font-weight: bold;">Staff</p>
-  <button type="button" class="btn btn-primary mb-3" routerLink="/admin/staff/form">Add Staff</button>
+  <p style="font-size: 20px; font-weight: bold">Staff</p>
+  <!-- <button
+    type="button"
+    class="btn btn-primary mb-3"
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal"
+    data-bs-whatever="@mdo"
+  >
+    Add Staff
+  </button> -->
+
+  <div
+  class="plus-icon"
+  style="
+    position: fixed;
+    bottom: 50px;
+    right: 60px;
+    font-size: 50px;
+    cursor: pointer;
+  "
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  data-bs-whatever="@mdo"
+>
+  <i class="fa fa-plus-circle"></i>
+</div>
   <table class="table">
     <thead>
       <tr>
@@ -9,22 +33,108 @@
         <th scope="col">Staff Name</th>
         <th scope="col">Location Name</th>
         <th scope="col">Camping Name</th>
-        <th scope="col">Action</th>
+        <!-- <th scope="col">Action</th> -->
       </tr>
     </thead>
-    <tbody  *ngFor="let staff of staffList">
+    <tbody *ngFor="let staff of staffList">
       <tr>
-        <td>{{staff.id}}</td>
-        <td>{{staff.staffName}}</td>
-        <td>{{staff.locationName}}</td>
-        <td>{{staff.campingName}}</td>
+        <td>{{ staff.id }}</td>
+        <td>{{ staff.staffName }}</td>
+        <td>{{ staff.locationName }}</td>
+        <td>{{ staff.campingName }}</td>
 
-        <td>
-          <div><div class="btn btn-success me-2">Edit</div>
-          <div class="btn btn-danger">Remove</div>
-        </div>
-        </td>
+        <!-- <td>
+          <div>
+            <div class="btn btn-success me-2">Edit</div>
+            <div class="btn btn-danger">Remove</div>
+          </div>
+        </td> -->
       </tr>
     </tbody>
   </table>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Staff</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="reset(staffForm)"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit(staffForm)" #staffForm="ngForm">
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Choose Location</label><br>
+            <select name="locationId" ngModel required>
+              <option
+                *ngFor="let location of locationList"
+                [value]="location.id"
+              >
+                {{ location.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Staff Name</label>
+            <input
+              type="text"
+              id="staffName"
+              class="form-control"
+              placeholder="Enter Name"
+              name="staffName"
+              ngModel
+              required
+              pattern="^[a-zA-Z\- ']+$"
+              minlength="5"
+              #modelName="ngModel"
+              [ngClass]="
+                modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+              "
+            />
+            <div>
+              <p
+                *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
+                class="text-danger"
+              >
+                Please enter staff name of length
+                {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
+              </p>
+              <p
+                *ngIf="modelName?.errors?.['required'] && modelName.dirty"
+                class="text-danger"
+              >
+                Please enter staff Name
+              </p>
+              <p *ngIf="modelName?.errors?.['pattern']" class="text-danger">
+                Name should contain only alphabets
+              </p>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2 mb-5">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="staffForm.invalid"
+              data-bs-dismiss="modal"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

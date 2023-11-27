@@ -10,6 +10,7 @@ export interface Bookings {
   caravanCapacity: number;
   price: number;
   stayCount: number;
+  status:String;
   campingName: String;
   description: String;
 }

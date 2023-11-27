@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top ms-4 me-4 mt-4" style="position: absolute;">
+<nav
+  class="navbar navbar-expand-lg navbar-dark fixed-top ms-4 me-4 mt-4"
+  style="position: absolute"
+>
   <a class="navbar-brand" href="#">
     <img
       src="../../../assets/logo/campzo2.png"
@@ -7,7 +10,7 @@
       class="d-inline-block align-top"
       alt="Logo"
     />
-    <span style="letter-spacing: 2px;color: #1e1b4b;"> CampZo</span>
+    <span style="letter-spacing: 2px; color: #1e1b4b"> CampZo</span>
   </a>
 </nav>
 
@@ -72,6 +75,13 @@
               </p>
             </div>
           </div>
+
+          <p
+            class="error"
+            [ngClass]="error.length > 0 ? 'visible' : 'invisible'"
+          >
+            {{ error }}
+          </p>
 
           <div class="d-flex align-items-center mb-4">
             <span>Not registered?</span>

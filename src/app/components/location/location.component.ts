@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 import { AppResponse } from 'src/app/model/appResponse';
-import { Bookings } from 'src/app/model/bookings';
 import { Location } from 'src/app/model/location';
+import { Person } from 'src/app/model/person';
 import { Userbooking } from 'src/app/model/userbooking';
 import { AuthService } from 'src/app/service/auth.service';
 import { BookingsService } from 'src/app/service/bookings.service';
@@ -22,6 +22,9 @@ export class LocationComponent {
   count: string = '';
 
   countArr: number[] = [];
+
+  numberOfPersons: number = 1;
+  persons: Person[] = [];
 
   lottieOptions: AnimationOptions = {
     path: 'assets/bookingsuccess.json',
@@ -48,10 +51,23 @@ export class LocationComponent {
   ngOnInit(): void {
     this.route.queryParams.subscribe((param) => {
       let id: number = param['id'];
+      console.log(id);
       this.locationService.getHomeLocations(id).subscribe({
         next: (response: AppResponse) => {
           this.locationList = response.data;
           console.log(this.locationList);
+
+
+          // for(let location of this.locationList){
+          //   location.photo
+          // }
+          
+          // const reader = new FileReader();
+          // reader.onload = (e) => (this.image = e.target.result);
+          // reader.readAsDataURL(new Blob([data]));
+
+
+
         },
         complete: () => {},
         error: (error: Error) => {
@@ -63,24 +79,26 @@ export class LocationComponent {
   }
 
   isStaff(id: number): boolean {
-    let Staff: boolean = false;
+    let staff: boolean = false;
     for (let item of this.locationList) {
-      if (item.staff?.id === id) {
-        Staff = true;
+      if (item.id === id && item.staff !== null) {
+        staff = true;
         break;
       }
     }
-    return Staff;
+
+    return staff;
   }
-  getStaff(id: number): String {
-    let Staff: String = '';
+
+  getStaff(id: number): String | undefined {
+    let staff: String | undefined = '';
     for (let item of this.locationList) {
-      if (item.staff?.id === id) {
-        Staff = item.staff.staffName;
+      if (item.id === id && item.staff !== null) {
+        staff = item.staff?.staffName;
         break;
       }
     }
-    return Staff;
+    return staff;
   }
 
   checkDate(): String {
@@ -95,9 +113,7 @@ export class LocationComponent {
       toDate: bookingForm.value.toDate,
     };
     this.bookingService.addUserBooking(booking).subscribe({
-      next: (response: AppResponse) => {
-        
-      },
+      next: (response: AppResponse) => {},
       complete: () => {},
       error: (error: Error) => {
         console.log('Message:', error.message);
@@ -106,7 +122,19 @@ export class LocationComponent {
     });
   }
 
-  loggedInUser():boolean{
+  loggedInUser(): boolean {
     return this.authService.isLoggedIn();
   }
+
+  generatePersons() {
+    this.persons = Array.from({ length: this.numberOfPersons }, () =>
+      this.createEmptyPerson()
+    );
+  }
+
+  private createEmptyPerson(): Person {
+    return { bookingId: 0, name: '', age: 0, gender: '' };
+  }
+
+  submitForm(personDetails: NgForm) {}
 }

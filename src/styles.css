@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 :root {
-  --primary-50: #eef2ff;
-  --primary-100: #e0e7ff;
-  --primary-200: #c7d2fe;
-  --primary-300: #a5b4fc;
-  --primary-400: #818cf8;
-  --primary-500: #6366f1;
-  --primary-600: #4f46e5;
-  --primary-700: #4338ca;
-  --primary-800: #3730a3;
-  --primary-900: #312e81;
-  --primary-950: #1e1b4b;
-  --secondary-100: #fef9c3;
-  --secondary-500: #eab308;
-  --secondary-900: #713f12;
+  --primary-50: #fdf2f8;
+  --primary-100: #fce7f3;
+  --primary-200: #fbcfe8;
+  --primary-300: #f9a8d4;
+  --primary-400: #f472b6;
+  --primary-500: #ec4899;
+  --primary-600: #db2777;
+  --primary-700: #be185d;
+  --primary-800: #9d174d;
+  --primary-900: #831843;
+  --primary-950: #500724;
+  --secondary-100: #eff6ff;
+  --secondary-500: #3b82f6;
+  --secondary-900: #1e3a8a;
   --red-100: #fee2e2;
   --red-300: #fca5a5;
   --red-500: #ef4444;
@@ -22,36 +22,50 @@
   --green-300: #bef264;
   --green-500: #84cc16;
   --green-700: #4d7c0f;
-  --border-radius: 8px;
+  --border-radius: 25px;
 }
 
 body {
-  font-family: 'Oswald', sans-serif;
-  background-color: var(--primary-50);
+  font-family: "Charis SIL", serif;
+  background-color:white;
+  /* background-image: linear-gradient(to left, #5106a7, #febaff, #ff5b7c); */
 }
 
-.bg-dark{
-  background-color: var(--primary-900)!important;
+a{
+  letter-spacing: 2px;
+  font-weight: bolder;
 }
 
-/* text */
+
 .text-primary {
   color: var(--primary-950) !important;
 }
 
-/* background */
+.heading{
+  color:var(--secondary-900) !important ;
+}
+
 .bg-primary {
   background-color: var(--primary-600) !important;
 }
 
-/* button */
+.bg-dark{
+  background-color: var(--secondary-100) !important;
+}
+
 .btn {
   border-radius: var(--border-radius);
 }
 
 .btn-primary {
   color: var(--secondary-100);
-  background: var(--primary-900);
+  background: var( --secondary-900);
+  border: none;
+}
+
+.login{
+  color: var(--secondary-100);
+  background: var( --primary-700);
   border: none;
 }
 
@@ -87,30 +101,26 @@ body {
   border: none;
 }
 
-/* form */
 .form-control,
 .form-control:focus {
-  color: var(--primary-500);
+  color: var( --secondary-900);
   background-color: var(--bs-body-bg);
-  border-color: var(--primary-500);
+  border-color: var( --secondary-900);
   outline: 0;
-  /* box-shadow: 0 0 0 0.25rem var(--primary-300); */
 }
 
 .form-label {
-  color: var(--primary-500);
+  color: var( --secondary-900);
 }
 
 .border {
   border-right-color: var(--primary-300) !important;
 }
 
-/* background color */
 .bg-body-tertiary {
   background-color: var(--primary-100) !important;
 }
 
-/* Custom */
 .error {
   background-color: var(--red-100);
   margin: 8px 0px;
@@ -123,36 +133,10 @@ body {
   white-space: nowrap;
 }
 
-.sideBarActive,
-.sideBarActive > a,
-.sideBarActive > a:hover,
-.sideBarActive > a:active {
-  color: var(--primary-500);
-  background-color: var(--primary-50) !important;
-  padding: 8px;
+.fa{
+  color: var(--secondary-900);
 }
 
-.sideBarItem,
-.sideBarItem > a {
-  color: var(--primary-500);
-  padding: 8px;
-}
-
-.sideBarItem > a:hover {
-  color: var(--primary-500);
-}
-
-.sideBarActive > .fa-solid {
-  color: var(--primary-500);
-}
-
-.sideBarItem:hover {
-  color: var(--primary-500);
-  background-color: var(--primary-50);
-  padding: 8px;
-}
-
-/* Icon */
 .fa-solid {
   color: var(--primary-300);
 }
