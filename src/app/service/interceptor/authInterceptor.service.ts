@@ -26,7 +26,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     
 
     if (authdata !== null && isApiUrl) {
-      console.log("auth");
+      console.log("auth -> ", request.url);
       
       request = request.clone({
         setHeaders: {
