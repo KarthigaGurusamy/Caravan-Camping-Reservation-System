@@ -37,7 +37,8 @@ export class AuthService {
       .post<AppResponse>(`${urlEndpoint.baseUrl}/auth/login`, login)
       .pipe(
         map((user) => {
-          this.userSubject.next(
+          this.storageService.setAuthData(
+            
             window.btoa(login.username + ':' + login.password)
           );
           return user;
@@ -53,6 +54,7 @@ export class AuthService {
 
   logout() {
     this.userSubject.next(null);
+    this.storageService.removeRoute();
     this.isAdminSubject.next(false);
     this.isLoggedInSubject.next(false);
     this.storageService.removeLoggedInUser();
@@ -70,21 +72,18 @@ export class AuthService {
   setLoggedIn(user: AppUser): void {
     this.storageService.setLoggedInUser(user);
     this.isLoggedInSubject.next(true);
-
+ 
+    let route: string | null = this.storageService.getRoute();
     if (user.role === CONSTANT.USER) {
-      this.router.navigate(['/'], { replaceUrl: true });
+      if (route === null) route = "user";
+      this.router.navigate(["/" + route], { replaceUrl: true });
     } else if (user.role === CONSTANT.ADMIN) {
+      if (route === null) route = "admin";
       this.isAdminSubject.next(true);
-      this.router.navigate(['/'], { replaceUrl: true });
+      this.router.navigate(["/" + route], { replaceUrl: true });
     }
+
   }
 
-  isAdminLoggedIn(): boolean {
-    let user: AppUser = this.storageService.getLoggedInUser();
-    if (user.role === CONSTANT.ADMIN) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+
 }

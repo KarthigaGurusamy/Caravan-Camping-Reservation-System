@@ -18,13 +18,14 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class LocationComponent {
   locationList: Location[] = [];
-
   count: string = '';
-
   countArr: number[] = [];
-
+  error: String = '';
   numberOfPersons: number = 1;
   persons: Person[] = [];
+  fromDate: String = '';
+  toDate: String = '';
+  isDateAvailable: boolean = false;
 
   lottieOptions: AnimationOptions = {
     path: 'assets/bookingsuccess.json',
@@ -56,18 +57,6 @@ export class LocationComponent {
         next: (response: AppResponse) => {
           this.locationList = response.data;
           console.log(this.locationList);
-
-
-          // for(let location of this.locationList){
-          //   location.photo
-          // }
-          
-          // const reader = new FileReader();
-          // reader.onload = (e) => (this.image = e.target.result);
-          // reader.readAsDataURL(new Blob([data]));
-
-
-
         },
         complete: () => {},
         error: (error: Error) => {
@@ -101,11 +90,9 @@ export class LocationComponent {
     return staff;
   }
 
-  checkDate(): String {
-    return 'Date are available';
-  }
-
   onSubmit(bookingForm: NgForm, id: number): void {
+    console.log(bookingForm.value);
+    
     let booking: Userbooking = {
       userId: this.storageService.getLoggedInUser().id,
       locationId: id,
@@ -113,7 +100,42 @@ export class LocationComponent {
       toDate: bookingForm.value.toDate,
     };
     this.bookingService.addUserBooking(booking).subscribe({
-      next: (response: AppResponse) => {},
+      next: (response: AppResponse) => {
+        this.error='';
+        this.isDateAvailable=false;
+      },
+      complete: () => {},
+      error: (error: Error) => {
+        console.log('Message:', error.message);
+        console.log('Name:', error.name);
+      },
+    });
+  }
+
+  isAdmin():boolean{
+    return this.authService.isAdmin();
+  }
+
+  checkDates(bookingForm: NgForm,id:number): void {
+
+    let value ={
+      fromDate:bookingForm.value.fromDate,
+      toDate:bookingForm.value.toDate,
+      locationId:id
+    }
+
+    this.bookingService.checkDateAvailability(value).subscribe({
+      next: (response: AppResponse) => {
+        this.isDateAvailable = response.data;
+
+        if (this.isDateAvailable) {
+          this.error = 'Woah..Dates are available! Click confirm to book..';
+        } else {
+          this.error =
+            'Oops!! The dates are not available choose another date..';
+          bookingForm.reset();
+        }
+      },
       complete: () => {},
       error: (error: Error) => {
         console.log('Message:', error.message);

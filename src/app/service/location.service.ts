@@ -20,7 +20,7 @@ export class LocationService {
   getHomeLocations(id: number): Observable<AppResponse> {
     console.log(id, 'oustside');
 
-    if (id == 0) {
+    if (id == 0 || id===undefined) {
       console.log(id, 'location');
 
       return this.httpClient.get<AppResponse>(

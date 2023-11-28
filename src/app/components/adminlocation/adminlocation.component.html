@@ -1,311 +1,417 @@
-<app-adminnav></app-adminnav>
-<div class="container mt-5">
-  <p style="font-size: 20px; font-weight: bold">Locations</p>
-  <!-- <button
-    type="button"
-    class="btn btn-primary mb-3"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-    data-bs-whatever="@mdo"
-  >
-    Add Location
-  </button> -->
-
-  <div
-    class="plus-icon"
-    style="
-      position: fixed;
-      bottom: 50px;
-      right: 60px;
-      font-size: 50px;
-      cursor: pointer;
-    "
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-    data-bs-whatever="@mdo"
-  >
-    <i class="fa fa-plus-circle"></i>
-  </div>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Image</th>
-        <th scope="col">Name</th>
-        <th scope="col">Address</th>
-        <th scope="col">Caravan Name</th>
-        <th scope="col">Caravan Capacity</th>
-        <th scope="col">Price</th>
-        <th scope="col">Stay Count</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let location of locationList">
-      <tr>
-        <td>{{ location.id }}</td>
-        <td><img src='{{"http://localhost:8080/api/admin/location/downloadFile/"+ location.id  }}' style="height: 200px;width: 200px;"/></td>
-        <td>{{ location.name }}</td>
-        <td>{{ location.address }}</td>
-        <td>{{ location.caravanName }}</td>
-        <td>{{ location.caravanCapacity }}</td>
-        <td>{{ location.price }}</td>
-        <td>{{ location.stayCount }}</td>
-        <td>
-          <div>
-            <div
-              class="btn btn-success me-2"
-              (click)="editLocation(location.id, locationForm)"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              data-bs-whatever="@mdo"
+<div class="container-fluid vh-100">
+  <div class="row flex-grow-1 vh-100">
+    <div class="sidebar col-1 p-0">
+      <div class="bg-body-tertiary h-100" tabindex="-1">
+        <div
+          class="d-flex flex-column justify-content-center min-vh-100 overflow-y-auto"
+        >
+          <ul class="nav d-flex flex-column align-items-center">
+            <li
+              class="nav-item d-flex align-items-center mb-2 sideBarItem"
+              routerLink="/admin/home"
+              title="Home"
             >
-              Edit
-            </div>
-            <div class="btn btn-danger" (click)="deleteLocation(location.id)">
-              Remove
-            </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Location</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="reset(locationForm)"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="onSubmit(locationForm)" #locationForm="ngForm">
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Choose Camping</label>
-            <select name="campingId" ngModel required>
-              <option *ngFor="let camping of campingList" [value]="camping.id">
-                {{ camping.campingName }}
-              </option>
-            </select>
-          </div>
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Location Name</label>
-            <input
-              type="text"
-              id="username"
-              class="form-control"
-              placeholder="Enter Location Name"
-              name="name"
-              ngModel
-              required
-              pattern="^[a-zA-Z\- ']+$"
-              minlength="5"
-              #modelName="ngModel"
-              [ngClass]="
-                modelName.invalid && modelName.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div>
-              <p
-                *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
-                class="text-danger"
-              >
-                Please enter name of length
-                {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
-              </p>
-              <p
-                *ngIf="modelName?.errors?.['required'] && modelName.dirty"
-                class="text-danger"
-              >
-                Please enter Name
-              </p>
-              <p *ngIf="modelName?.errors?.['pattern']" class="text-danger">
-                Name should contain only alphabets
-              </p>
-            </div>
-          </div>
+              <i class="fa-solid fa-house"></i>
+            </li>
 
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Caravan Name</label>
-            <input
-              type="text"
-              id="username"
-              class="form-control"
-              placeholder="Enter Caravan Name"
-              name="caravanName"
-              ngModel
-              required
-              minlength="5"
-              #modelCaravanName="ngModel"
-              [ngClass]="
-                modelCaravanName.invalid && modelCaravanName.dirty
-                  ? 'is-invalid'
-                  : ''
-              "
-            />
-            <div>
-              <p
-                *ngIf="modelCaravanName?.errors?.['minlength']?.['requiredLength']&& modelCaravanName.dirty "
-                class="text-danger"
-              >
-                Please enter caravan name of length
-                {{modelCaravanName?.errors?.['minlength']?.['requiredLength'] | json}}
-              </p>
-              <p
-                *ngIf="modelCaravanName?.errors?.['required'] && modelCaravanName.dirty"
-                class="text-danger"
-              >
-                Please enter caravan Name
-              </p>
-              <p
-                *ngIf="modelCaravanName?.errors?.['pattern']"
-                class="text-danger"
-              >
-                Caravan Name should contain only alphabets
-              </p>
-            </div>
-          </div>
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Caravan Capacity</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Caravan capacity"
-              name="caravanCapacity"
-              ngModel
-              required
-              pattern="^[1-9]\d*$"
-              #modelCapacity="ngModel"
-              [ngClass]="
-                modelCapacity.invalid && modelCapacity.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div>
-              <p
-                *ngIf="modelCapacity?.errors?.['required'] && modelCapacity.dirty"
-                class="text-danger"
-              >
-                Please enter Caravan capacity
-              </p>
-              <p *ngIf="modelCapacity?.errors?.['pattern']" class="text-danger">
-                Capacity should contain only numbers greater than zero
-              </p>
-            </div>
-          </div>
-
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Price</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Price"
-              name="price"
-              ngModel
-              required
-              pattern="^[1-9]\d*$"
-              #modelPrice="ngModel"
-              [ngClass]="
-                modelPrice.invalid && modelPrice.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div>
-              <p
-                *ngIf="modelPrice?.errors?.['required'] && modelPrice.dirty"
-                class="text-danger"
-              >
-                Please enter Caravan capacity
-              </p>
-              <p *ngIf="modelPrice?.errors?.['pattern']" class="text-danger">
-                Price should contain only numbers greater than zero
-              </p>
-            </div>
-          </div>
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Stay count</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Stay count"
-              name="stayCount"
-              ngModel
-              required
-              pattern="^[1-9]\d*$"
-              #modelCount="ngModel"
-              [ngClass]="
-                modelCount.invalid && modelCount.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div>
-              <p
-                *ngIf="modelCount?.errors?.['required'] && modelCount.dirty"
-                class="text-danger"
-              >
-                Please enter Stay Count
-              </p>
-              <p *ngIf="modelCount?.errors?.['pattern']" class="text-danger">
-                Stay count should contain only numbers greater than zero
-              </p>
-            </div>
-          </div>
-          <div class="form-outline mb-3">
-            <label class="form-label" for="name">Address</label>
-            <textarea
-              class="form-control"
-              placeholder="Enter Address"
-              name="address"
-              ngModel
-              required
-              minlength="20"
-              #modelAddress="ngModel"
-              [ngClass]="
-                modelAddress.invalid && modelAddress.dirty ? 'is-invalid' : ''
-              "
-            ></textarea>
-            <div>
-              <p
-                *ngIf="modelAddress?.errors?.['minlength']?.['requiredLength']&& modelAddress.dirty "
-                class="text-danger"
-              >
-                Please enter address of length
-                {{modelAddress?.errors?.['minlength']?.['requiredLength'] | json}}
-              </p>
-              <p
-                *ngIf="modelAddress?.errors?.['required'] && modelAddress.dirty"
-                class="text-danger"
-              >
-                Please enter description
-              </p>
-            </div>
-          </div>
-
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Choose Image</label>
-            <input type="file" class="input-file" id="customFile"  ngModel (change)="onFileChange($event)" />
-          </div>
-
-          <div class="d-grid gap-2 mb-5">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="locationForm.invalid"
+            <li
+              class="nav-item d-flex align-items-center mb-2 sideBarItem"
+              [routerLink]="['/admin/campings']"
+              title="Campings"
             >
-              {{ button }}
-            </button>
-          </div>
-        </form>
+              <i class="fa-solid fa-tents"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-2 sideBarItem"
+              [routerLink]="['/admin/locations']"
+              title="Locations"
+            >
+              <i class="fa-solid fa-map-marker"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-2 sideBarItem"
+              [routerLink]="['/admin/staff']"
+              title="Staffs"
+            >
+              <i class="fa-solid fa-user"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-2 sideBarItem"
+              title="Users"
+            >
+              <i class="fa-solid fa-users"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-2  sideBarItem"
+              [routerLink]="['/admin/bookings']"
+              title="Bookings"
+            >
+              <i class="fa-solid fa-book"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center sideBarItem"
+              routerLink="/"
+              title="Back"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+    <main class="col-10 px-4">
+      <div class="container mt-5">
+        <p style="font-size: 20px; font-weight: bold">Locations</p>
+        <!-- <button
+          type="button"
+          class="btn btn-primary mb-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo"
+        >
+          Add Location
+        </button> -->
+
+        <div
+          class="plus-icon"
+          style="
+            position: fixed;
+            bottom: 50px;
+            right: 60px;
+            font-size: 50px;
+            cursor: pointer;
+          "
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo"
+        >
+          <i class="fa fa-plus-circle"></i>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Caravan Name</th>
+              <th scope="col">Caravan Capacity</th>
+              <th scope="col">Price</th>
+              <th scope="col">Stay Count</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let location of locationList">
+            <tr>
+              <td>{{ location.id }}</td>
+              <td>
+                <img
+                  src="{{
+                    'http://localhost:8080/api/admin/location/downloadFile/' +
+                      location.id
+                  }}"
+                  style="height: 200px; width: 200px"
+                />
+              </td>
+              <td>{{ location.name }}</td>
+              <td>{{ location.address }}</td>
+              <td>{{ location.caravanName }}</td>
+              <td>{{ location.caravanCapacity }}</td>
+              <td>{{ location.price }}</td>
+              <td>{{ location.stayCount }}</td>
+              <td>
+                <div>
+                  <div
+                    class="btn btn-success me-2"
+                    (click)="editLocation(location.id, locationForm)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    data-bs-whatever="@mdo"
+                  >
+                    Edit
+                  </div>
+                  <div
+                    class="btn btn-danger"
+                    (click)="deleteLocation(location.id)"
+                  >
+                    Remove
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Add Location
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                (click)="reset(locationForm)"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="onSubmit(locationForm)" #locationForm="ngForm">
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username"
+                    >Choose Camping</label
+                  >
+                  <select name="campingId" ngModel required>
+                    <option
+                      *ngFor="let camping of campingList"
+                      [value]="camping.id"
+                    >
+                      {{ camping.campingName }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username">Location Name</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    placeholder="Enter Location Name"
+                    name="name"
+                    ngModel
+                    required
+                    pattern="^[a-zA-Z\- ']+$"
+                    minlength="5"
+                    #modelName="ngModel"
+                    [ngClass]="
+                      modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+                    "
+                  />
+                  <div>
+                    <p
+                      *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
+                      class="text-danger"
+                    >
+                      Please enter name of length
+                      {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
+                    </p>
+                    <p
+                      *ngIf="modelName?.errors?.['required'] && modelName.dirty"
+                      class="text-danger"
+                    >
+                      Please enter Name
+                    </p>
+                    <p
+                      *ngIf="modelName?.errors?.['pattern']"
+                      class="text-danger"
+                    >
+                      Name should contain only alphabets
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username">Caravan Name</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    placeholder="Enter Caravan Name"
+                    name="caravanName"
+                    ngModel
+                    required
+                    minlength="5"
+                    #modelCaravanName="ngModel"
+                    [ngClass]="
+                      modelCaravanName.invalid && modelCaravanName.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <div>
+                    <p
+                      *ngIf="modelCaravanName?.errors?.['minlength']?.['requiredLength']&& modelCaravanName.dirty "
+                      class="text-danger"
+                    >
+                      Please enter caravan name of length
+                      {{modelCaravanName?.errors?.['minlength']?.['requiredLength'] | json}}
+                    </p>
+                    <p
+                      *ngIf="modelCaravanName?.errors?.['required'] && modelCaravanName.dirty"
+                      class="text-danger"
+                    >
+                      Please enter caravan Name
+                    </p>
+                    <p
+                      *ngIf="modelCaravanName?.errors?.['pattern']"
+                      class="text-danger"
+                    >
+                      Caravan Name should contain only alphabets
+                    </p>
+                  </div>
+                </div>
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username"
+                    >Caravan Capacity</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Caravan capacity"
+                    name="caravanCapacity"
+                    ngModel
+                    required
+                    pattern="^[1-9]\d*$"
+                    #modelCapacity="ngModel"
+                    [ngClass]="
+                      modelCapacity.invalid && modelCapacity.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <div>
+                    <p
+                      *ngIf="modelCapacity?.errors?.['required'] && modelCapacity.dirty"
+                      class="text-danger"
+                    >
+                      Please enter Caravan capacity
+                    </p>
+                    <p
+                      *ngIf="modelCapacity?.errors?.['pattern']"
+                      class="text-danger"
+                    >
+                      Capacity should contain only numbers greater than zero
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username">Price</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Price"
+                    name="price"
+                    ngModel
+                    required
+                    pattern="^[1-9]\d*$"
+                    #modelPrice="ngModel"
+                    [ngClass]="
+                      modelPrice.invalid && modelPrice.dirty ? 'is-invalid' : ''
+                    "
+                  />
+                  <div>
+                    <p
+                      *ngIf="modelPrice?.errors?.['required'] && modelPrice.dirty"
+                      class="text-danger"
+                    >
+                      Please enter Caravan capacity
+                    </p>
+                    <p
+                      *ngIf="modelPrice?.errors?.['pattern']"
+                      class="text-danger"
+                    >
+                      Price should contain only numbers greater than zero
+                    </p>
+                  </div>
+                </div>
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username">Stay count</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Stay count"
+                    name="stayCount"
+                    ngModel
+                    required
+                    pattern="^[1-9]\d*$"
+                    #modelCount="ngModel"
+                    [ngClass]="
+                      modelCount.invalid && modelCount.dirty ? 'is-invalid' : ''
+                    "
+                  />
+                  <div>
+                    <p
+                      *ngIf="modelCount?.errors?.['required'] && modelCount.dirty"
+                      class="text-danger"
+                    >
+                      Please enter Stay Count
+                    </p>
+                    <p
+                      *ngIf="modelCount?.errors?.['pattern']"
+                      class="text-danger"
+                    >
+                      Stay count should contain only numbers greater than zero
+                    </p>
+                  </div>
+                </div>
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="name">Address</label>
+                  <textarea
+                    class="form-control"
+                    placeholder="Enter Address"
+                    name="address"
+                    ngModel
+                    required
+                    minlength="20"
+                    #modelAddress="ngModel"
+                    [ngClass]="
+                      modelAddress.invalid && modelAddress.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  ></textarea>
+                  <div>
+                    <p
+                      *ngIf="modelAddress?.errors?.['minlength']?.['requiredLength']&& modelAddress.dirty "
+                      class="text-danger"
+                    >
+                      Please enter address of length
+                      {{modelAddress?.errors?.['minlength']?.['requiredLength'] | json}}
+                    </p>
+                    <p
+                      *ngIf="modelAddress?.errors?.['required'] && modelAddress.dirty"
+                      class="text-danger"
+                    >
+                      Please enter description
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-3">
+                  <label class="form-label" for="username">Choose Image</label>
+                  <input
+                    type="file"
+                    class="input-file"
+                    id="customFile"
+                    ngModel
+                    (change)="onFileChange($event)"
+                  />
+                </div>
+
+                <div class="d-grid gap-2 mb-5">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="locationForm.invalid"
+                  >
+                    {{ button }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </div>

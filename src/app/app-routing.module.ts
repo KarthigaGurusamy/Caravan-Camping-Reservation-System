@@ -14,21 +14,22 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { StaffComponent } from './components/staff/staff.component';
 import { BookingformComponent } from './components/bookingform/bookingform.component';
 import { CampingsComponent } from './components/campings/campings.component';
+import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'campings',component:CampingsComponent},
-  {path:'location',component:LocationComponent},
-  {path:'admin/home',component:AdminpageComponent},
-  {path:'user/home',component:UserpageComponent},
-  {path:'admin/campings',component:AdmincampingComponent},
-  {path:'admin/locations',component:AdminlocationComponent},
-  {path:'admin/bookings',component:BookingsComponent},
-  {path:'user/bookings',component:UserbookingsComponent},
-  {path:'user/profile',component:UserprofileComponent},
-  {path:'admin/staff',component:StaffComponent},
+  {path:'campings',component:CampingsComponent, canActivate: [authGuard]},
+  {path:'location',component:LocationComponent, canActivate: [authGuard]},
+  {path:'admin/home',component:AdminpageComponent, canActivate: [authGuard]},
+  {path:'user/home',component:UserpageComponent, canActivate: [authGuard]},
+  {path:'admin/campings',component:AdmincampingComponent, canActivate: [authGuard]},
+  {path:'admin/locations',component:AdminlocationComponent, canActivate: [authGuard]},
+  {path:'admin/bookings',component:BookingsComponent, canActivate: [authGuard]},
+  {path:'user/bookings',component:UserbookingsComponent, canActivate: [authGuard]},
+  {path:'user/profile',component:UserprofileComponent, canActivate: [authGuard]},
+  {path:'admin/staff',component:StaffComponent, canActivate: [authGuard]},
   {path:'user/booking/form',component:BookingformComponent},
 
 ];

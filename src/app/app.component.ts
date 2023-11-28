@@ -33,4 +33,12 @@ export class AppComponent {
       this.isLoggedIn = isLoggedIn;
     });
   }
+
+  loggedIn():boolean{
+    return this.authService.isLoggedIn();
+  }
+
+  isAdminLoggedIn():boolean{
+    return this.authService.isAdmin();
+  }
 }

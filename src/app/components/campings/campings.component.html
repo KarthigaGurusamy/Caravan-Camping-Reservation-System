@@ -1,48 +1,32 @@
-<div class="container-fluid">
-  <div class="row vh-100">
-    <nav id="sidebar" class="col-1 d-md-block bg-dark sidebar">
-      <div
-        class="sidebar-sticky d-flex flex-column justify-content-center h-100"
-      >
-        <ul class="nav flex-column align-items-center">
-          <!-- <li class="nav-item">
-              <a class="navbar-brand" href="#">
-                  <img
-                    src="../../../assets/logo/campzo2.png"
-                    width="40"
-                    height="40"
-                    class="d-inline-block align-top rounded-circle"
-                    alt="Logo"
-                  />
-                </a>
-            </li> -->
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              data-toggle="tooltip"
-              data-placement="right"
+<div class="container-fluid vh-100">
+  <div class="row flex-grow-1 vh-100">
+    <div class="sidebar col-1 p-0">
+      <div class="bg-body-tertiary h-100" tabindex="-1">
+        <div
+          class="d-flex flex-column justify-content-center min-vh-100 overflow-y-auto"
+        >
+          <ul class="nav d-flex flex-column align-items-center">
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
               data-bs-toggle="modal"
               data-bs-target="#searchModal"
               style="cursor: pointer"
+              title="Search"
             >
-              <i class="fa fa-search"></i>
-            </a>
+            <i class="fa-solid fa-search"></i>
+            </li>
+
+            <li
+            class="nav-item d-flex align-items-center sideBarItem"
+            routerLink="/"
+            title="Back"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              data-toggle="tooltip"
-              data-placement="right"
-              title="Profile"
-              routerLink="/"
-            >
-              <i class="fa fa-arrow-left"></i>
-            </a>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
 
     <main role="main" class="col-10 px-md-4">
       <section class="mt-5 ms-5">

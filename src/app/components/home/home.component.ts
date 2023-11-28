@@ -98,6 +98,7 @@ export class HomeComponent {
     return this.authService.isLoggedIn();
   }
 
+
   logout(): void {
     this.authService.logout();
   }

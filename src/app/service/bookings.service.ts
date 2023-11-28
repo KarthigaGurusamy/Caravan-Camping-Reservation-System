@@ -13,6 +13,7 @@ import { Userbooking } from '../model/userbooking';
 export class BookingsService {
 
 
+
   constructor(private httpClient: HttpClient, private storageService:StorageService) {}
 
   getBookings(): Observable<AppResponse> {
@@ -33,6 +34,11 @@ export class BookingsService {
 
   addUserBooking(booking: Userbooking) {
     return this.httpClient.post<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/create`,booking);
+
+  }
+
+  checkDateAvailability(value: any):Observable<AppResponse> {
+    return this.httpClient.post<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/checkAvailability`,value);
 
   }
 }

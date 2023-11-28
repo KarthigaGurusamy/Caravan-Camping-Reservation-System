@@ -1,38 +1,82 @@
-<app-usernav></app-usernav>
-  
-  <div class="container">
-    <div class="container mt-5">
-      <div class="row">
-    
-        <div class="col-md-4">
-          <div class="card card-gradient-1">
-            <div class="card-body">
-              <h5 class="card-title">Total Bookings</h5>
-              <p class="card-text">150</p>
-            </div>
-          </div>
+<div class="container-fluid vh-100">
+  <div class="row flex-grow-1 vh-100">
+    <div class="sidebar col-1 p-0">
+      <div class="bg-body-tertiary h-100" tabindex="-1">
+        <div
+          class="d-flex flex-column justify-content-center p-0 pt-3 min-vh-100 overflow-y-auto"
+        >
+          <ul class="nav d-flex flex-column align-items-center">
+            <li
+              class="nav-item d-flex align-items-center px-4 sideBarItem"
+              routerLink="/user/home"
+              title="Home"
+            >
+              <i class="fa-solid fa-house"></i>
+            </li>
+         
+         
+            <li
+              class="nav-item d-flex align-items-center px-4 sideBarItem"
+              [routerLink]="['/user/profile']"
+              title="Profile"
+            >
+              <i class="fa-solid fa-user"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center px-4 sideBarItem"
+              [routerLink]="['/user/bookings']"
+              title="Bookings"
+            >
+              <i class="fa-solid fa-book"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center px-4 sideBarItem"
+              routerLink="/"
+              title="Back"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+            </li>
+          </ul>
         </div>
-    
-        <div class="col-md-4">
-          <div class="card card-gradient-2 ">
-            <div class="card-body">
-              <h5 class="card-title">Monthly Bookings</h5>
-              <p class="card-text">100</p>
-            </div>
-          </div>
-        </div>
-    
-        <div class="col-md-4">
-          <div class="card card-gradient-3 ">
-            <div class="card-body">
-              <h5 class="card-title">Upcoming Trips</h5>
-              <p class="card-text">300</p>
-            </div>
-          </div>
-        </div>
-    
       </div>
-
     </div>
+    <main class="col-10 px-4">
+      <div class="container">
+        <div class="container mt-5">
+          <h3 class="mt-3 mb-3" style="text-align: center;">Welcome User!!!</h3>
+          <div class="row">
+        
+            <div class="col-md-4">
+              <div class="card card-gradient-1">
+                <div class="card-body">
+                  <h5 class="card-title">Total Bookings</h5>
+                  <p class="card-text">150</p>
+                </div>
+              </div>
+            </div>
+        
+            <div class="col-md-4">
+              <div class="card card-gradient-2 ">
+                <div class="card-body">
+                  <h5 class="card-title">Monthly Bookings</h5>
+                  <p class="card-text">100</p>
+                </div>
+              </div>
+            </div>
+        
+            <div class="col-md-4">
+              <div class="card card-gradient-3 ">
+                <div class="card-body">
+                  <h5 class="card-title">Upcoming Trips</h5>
+                  <p class="card-text">300</p>
+                </div>
+              </div>
+            </div>
+        
+          </div>
+    
+        </div>
+      </div>
+    </main>
   </div>
-  
+</div>

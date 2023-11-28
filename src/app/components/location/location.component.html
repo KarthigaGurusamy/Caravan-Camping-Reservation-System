@@ -1,35 +1,32 @@
-<div class="container-fluid">
-  <div class="row">
-    <nav id="sidebar" class="col-1 d-md-block bg-dark sidebar">
-      <div
-        class="sidebar-sticky d-flex flex-column justify-content-center vh-100"
-      >
-        <ul class="nav flex-column align-items-center">
-          <li class="nav-item">
-            <a
-              class="nav-link"
+<div class="container-fluid vh-100">
+  <div class="row flex-grow-1 vh-100">
+    <div class="sidebar col-1 p-0">
+      <div class="bg-body-tertiary h-100" tabindex="-1">
+        <div
+          class="d-flex flex-column justify-content-center min-vh-100 overflow-y-auto"
+        >
+          <ul class="nav d-flex flex-column align-items-center">
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
               data-bs-toggle="modal"
               data-bs-target="#searchModal"
               style="cursor: pointer"
+              title="Search"
             >
-              <i class="fa fa-search"></i>
-            </a>
+            <i class="fa-solid fa-search"></i>
+            </li>
+
+            <li
+            class="nav-item d-flex align-items-center sideBarItem"
+            routerLink="/"
+            title="Back"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              data-toggle="tooltip"
-              data-placement="right"
-              title="Profile"
-              routerLink="/"
-            >
-              <i class="fa fa-arrow-left"></i>
-            </a>
-          </li>
-        </ul>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
 
     <main role="main" class="col-10 px-md-4">
       <section>
@@ -67,20 +64,14 @@
                   <p *ngIf="isStaff(location.id)">
                     Staff Name: {{ getStaff(location.id) }}
                   </p>
-                  <p style="color: red">
-                    {{
-                      loggedInUser()
-                        ? ""
-                        : "Please log in to book camping location"
-                    }}
-                  </p>
+                 
                   <button
                     class="btn btn-primary"
                     (click)="playAnimation()"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     data-bs-whatever="@mdo"
-                    [disabled]="!loggedInUser()"
+                    [disabled]="isAdmin()"
                   >
                     Book Now
                   </button>
@@ -136,13 +127,18 @@
                           />
                         </div>
                       </div>
+                      <p
+                        [ngClass]="error.length > 0 ? 'visible' : 'invisible'"
+                        style="color: red"
+                      >
+                        {{ error }}
+                      </p>
 
                       <div class="modal-footer">
-                        <button
-                          class="btn btn-primary"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        >
+                        <button class="btn btn-danger" type="button" [disabled]="isDateAvailable" (click)="checkDates(bookingForm,location.id)">
+                          Check
+                        </button>
+                        <button class="btn btn-success" type="submit" [disabled]="!isDateAvailable" data-bs-dismiss="modal">
                           Confirm
                         </button>
                       </div>
@@ -185,7 +181,6 @@
   </div>
 </div>
 
-
 <div
   class="modal fade"
   id="searchModal"
@@ -205,8 +200,9 @@
           style="border-radius: 15px"
         />
         <datalist datalist id="browsers">
-          <option *ngFor="let location of locationList"
-          [value]="location.name">{{location.name}}</option>
+          <option *ngFor="let location of locationList" [value]="location.name">
+            {{ location.name }}
+          </option>
         </datalist>
         <div class="input-group-append"></div>
         <div class="modal-footer">
@@ -218,3 +214,51 @@
     </div>
   </div>
 </div>
+
+<!-- <button routerLink="/user/booking/form">Booking</button> -->
+
+
+<!-- <div class="container my-5 py-5">
+    <div class="row d-flex justify-content-center py-5">
+      <div class="col-md-7 col-lg-5 col-xl-4">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-4">
+            <form>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-outline">
+                  <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                    placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                  <label class="form-label" for="typeText">Card Number</label>
+                </div>
+                <img src="https://img.icons8.com/color/48/000000/visa.png" alt="visa" width="64px" />
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="form-outline">
+                  <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                    placeholder="Cardholder's Name" />
+                  <label class="form-label" for="typeName">Cardholder's Name</label>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pb-2">
+                <div class="form-outline">
+                  <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
+                    size="7" id="exp" minlength="7" maxlength="7" />
+                  <label class="form-label" for="typeExp">Expiration</label>
+                </div>
+                <div class="form-outline">
+                  <input type="password" id="typeText2" class="form-control form-control-lg"
+                    placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                  <label class="form-label" for="typeText2">Cvv</label>
+                </div>
+                <button type="button" class="btn btn-info btn-lg btn-rounded">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

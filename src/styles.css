@@ -27,29 +27,28 @@
 
 body {
   font-family: "Charis SIL", serif;
-  background-color:white;
+  background-color: white;
   /* background-image: linear-gradient(to left, #5106a7, #febaff, #ff5b7c); */
 }
 
-a{
+a {
   letter-spacing: 2px;
   font-weight: bolder;
 }
-
 
 .text-primary {
   color: var(--primary-950) !important;
 }
 
-.heading{
-  color:var(--secondary-900) !important ;
+.heading {
+  color: var(--secondary-900) !important ;
 }
 
 .bg-primary {
   background-color: var(--primary-600) !important;
 }
 
-.bg-dark{
+.bg-dark {
   background-color: var(--secondary-100) !important;
 }
 
@@ -59,14 +58,24 @@ a{
 
 .btn-primary {
   color: var(--secondary-100);
-  background: var( --secondary-900);
+  background: var(--secondary-900);
   border: none;
 }
 
-.login{
+.login {
   color: var(--secondary-100);
-  background: var( --primary-700);
+  background: var(--primary-700);
   border: none;
+  width: 100px;
+}
+.border {
+  border-color: var(--primary-700) !important;
+}
+.login:hover {
+  color: var(--secondary-100);
+  /* background: var( --secondary-900); */
+  border-color: var(--primary-700);
+  width: 100px;
 }
 
 .btn-primary:hover,
@@ -103,14 +112,14 @@ a{
 
 .form-control,
 .form-control:focus {
-  color: var( --secondary-900);
+  color: var(--secondary-900);
   background-color: var(--bs-body-bg);
-  border-color: var( --secondary-900);
+  border-color: var(--secondary-900);
   outline: 0;
 }
 
 .form-label {
-  color: var( --secondary-900);
+  color: var(--secondary-900);
 }
 
 .border {
@@ -118,9 +127,35 @@ a{
 }
 
 .bg-body-tertiary {
-  background-color: var(--primary-100) !important;
+  background-color: var(--secondary-100) !important;
+}
+.nav-item {
+  color: var(--primary-100) !important;
+  /* background-color: var(--primary-100); */
 }
 
+.nav-item:hover {
+  color: var(--primary-100) !important;
+  cursor: pointer;
+}
+
+.fa-solid {
+  color: var(--secondary-900) !important;
+}
+
+.fa-solid:hover {
+  color: var(--secondary-900) !important;
+}
+
+.nav-link,
+.nav-link:hover {
+  color: inherit;
+}
+
+.sideBarActive {
+  background-color: var(--primary-500) !important;
+  color: var(--primary-100) !important;
+}
 .error {
   background-color: var(--red-100);
   margin: 8px 0px;
@@ -133,7 +168,7 @@ a{
   white-space: nowrap;
 }
 
-.fa{
+.fa {
   color: var(--secondary-900);
 }
 

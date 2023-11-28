@@ -6,9 +6,9 @@
     <div>
       <a class="navbar-brand" href="#">
         <img
-          src="../../../assets/logo/campzo2.png"
-          width="40"
-          height="40"
+          src="../../../assets/logo/Capture.png"
+          width="45"
+          height="45"
           class="d-inline-block align-top rounded-circle"
           alt="Logo"
         />
@@ -49,15 +49,15 @@
 
     <div>
       <div
-        class="btn login"
-        data-bs-target="#exampleModalToggle"
+        class="btn login border"
+        data-bs-target="#loginFormModal"
         data-bs-toggle="modal"
         *ngIf="!loggedInUser()"
       >
         Login
       </div>
       <div
-        class="btn login"
+        class="btn login border"
         *ngIf="isAdmin() && loggedInUser()"
         routerLink="/admin/home"
       >
@@ -65,16 +65,19 @@
       </div>
 
       <div
-        class="btn login"
+        class="btn login border"
         *ngIf="!isAdmin() && loggedInUser()"
         routerLink="/user/home"
       >
         Profile
       </div>
-      <div class="btn login" *ngIf="loggedInUser()" (click)="logout()">
+      <div
+        class="btn login border ms-2"
+        *ngIf="loggedInUser()"
+        (click)="logout()"
+      >
         Logout
       </div>
-      
     </div>
   </div>
 </nav>
@@ -82,12 +85,22 @@
   <img src="../../../assets/images/bg.jpg" style="width: 100%; height: 650px" />
   <div class="slogan">
     Nature's Best, <br />Adventure's Best...!<br />
-    <div class="btn btn-primary login">Explore</div>
+    <a
+      class="btn btn-primary login"
+      style="width: 180px"
+      href="#campZoLocations"
+      >Explore</a
+    >
   </div>
 </div>
 
 <section class="mt-5">
-  <marquee width="100%" direction="right" height="50px" style="font-size: 30px;color: #be185d;">
+  <marquee
+    width="100%"
+    direction="right"
+    height="50px"
+    style="font-size: 30px; color: #be185d"
+  >
     Hurry Up! Offers are ahead!!! Make family time with our CampZo!!!.
   </marquee>
 </section>
@@ -115,7 +128,7 @@
             style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary">Tent Camping</button>
+            <p>Tent Camping</p>
           </div>
         </div>
       </div>
@@ -128,7 +141,7 @@
             style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary">Back Packing</button>
+            <p>Back Packing</p>
           </div>
         </div>
       </div>
@@ -141,7 +154,7 @@
             style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary">Glamping</button>
+            <p>Glamping</p>
           </div>
         </div>
       </div>
@@ -154,7 +167,7 @@
             style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary">Wild Camping</button>
+            <p>Wild Camping</p>
           </div>
         </div>
       </div>
@@ -167,7 +180,7 @@
             style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary">Bicycle Camping</button>
+            <p>Bicycle Camping</p>
           </div>
         </div>
       </div>
@@ -180,21 +193,12 @@
             style="height: 300px"
           />
           <div class="card-overlay">
-            <button class="btn btn-primary">Caravan Camping</button>
+            <p>Caravan Camping</p>
           </div>
         </div>
       </div>
-      <div>
-        <p style="color: red">
-          {{ loggedInUser() ? "" : "Please log in to view campings" }}
-        </p>
-        <button
-          class="btn btn-primary"
-          routerLink="/campings"
-          [disabled]="!loggedInUser()"
-        >
-          View More
-        </button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" routerLink="/campings">View More</button>
       </div>
     </div>
   </div>
@@ -276,15 +280,8 @@
           <div class="card-overlay">Yercaud</div>
         </div>
       </div>
-      <div>
-        <p style="color: red">
-          {{ loggedInUser() ? "" : "Please log in to view location" }}
-        </p>
-        <button
-          class="btn btn-primary"
-          (click)="getHomeLocations(0)"
-          [disabled]="!loggedInUser()"
-        >
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary" (click)="getHomeLocations(0)">
           View More
         </button>
       </div>
@@ -347,12 +344,19 @@
           Contact Details
         </p>
         <p></p>
-        <ul class="contact-details ms-5" style="text-align: justify">
-          <p>Phone: +1 (666) 123-4567</p>
-          <p>Email: info@campzo.com</p>
-          <p>
-            Location: 732/21 Second Street, Manchester,King Street, Kingston
-            United Kingdom
+        <ul class="contact-details" style="text-align: justify">
+          <p style="font-weight: bold">
+            Phone: <span style="font-weight: lighter">+91 99555 99555</span>
+          </p>
+          <p style="font-weight: bold">
+            Email: <span style="font-weight: lighter">info@campzo.com</span>
+          </p>
+          <p style="font-weight: bold">
+            Location:
+            <span style="font-weight: lighter"
+              >732/21 Second Street, Manchester,King Street, Kingston United
+              Kingdom</span
+            >
           </p>
         </ul>
       </div>
@@ -391,7 +395,7 @@
 
 <div
   class="modal fade modal-lg"
-  id="exampleModalToggle"
+  id="loginFormModal"
   aria-hidden="true"
   aria-labelledby="exampleModalToggleLabel"
   tabindex="-1"
@@ -686,7 +690,7 @@
                 <a
                   style="cursor: pointer"
                   class="text-primary text-decoration-none px-2"
-                  data-bs-target="#exampleModalToggle"
+                  data-bs-target="#loginFormModal"
                   data-bs-toggle="modal"
                   >Login here</a
                 >
@@ -696,7 +700,7 @@
                 type="submit"
                 class="btn btn-primary btn-block mb-4"
                 [disabled]="registerForm.invalid"
-                data-bs-target="#exampleModalToggle"
+                data-bs-target="#loginFormModal"
                 data-bs-toggle="modal"
               >
                 Register
