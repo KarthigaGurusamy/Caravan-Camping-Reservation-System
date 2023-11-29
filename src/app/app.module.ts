@@ -27,6 +27,8 @@ import { StaffComponent } from './components/staff/staff.component';
 import { BookingformComponent } from './components/bookingform/bookingform.component';
 import { CampingsComponent } from './components/campings/campings.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AdminuserdetailsComponent } from './components/adminuserdetails/adminuserdetails.component';
+import { NotloggedinComponent } from './components/notloggedin/notloggedin.component';
 
 export function playerFactory() {
   return player;
@@ -52,7 +54,9 @@ export function playerFactory() {
     StaffComponent,
     BookingformComponent,
     CampingsComponent,
-    PaymentComponent
+    PaymentComponent,
+    AdminuserdetailsComponent,
+    NotloggedinComponent
   ],
   imports: [
     BrowserModule,

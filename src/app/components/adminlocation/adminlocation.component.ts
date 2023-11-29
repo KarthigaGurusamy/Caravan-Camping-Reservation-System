@@ -18,6 +18,22 @@ export class AdminlocationComponent {
   button: String = 'Add';
   campingList: Camping[] = [];
 
+  value: Location = {
+    id: 0,
+    address: '',
+    name: '',
+    campingId: 0,
+    caravanName: '',
+    caravanCapacity: 0,
+    price: 0,
+    camping: {
+      id: 0,
+      campingName: '',
+      description: '',
+    },
+    stayCount: 0,
+  };
+
   file = '';
 
   constructor(
@@ -31,8 +47,6 @@ export class AdminlocationComponent {
       next: (response: AppResponse) => {
         this.locationList = response.data;
         console.log(this.locationList);
-
-
       },
       complete: () => {},
       error: (error: Error) => {
@@ -81,6 +95,7 @@ export class AdminlocationComponent {
         this.locationList = response.data;
         this.editId = 0;
         this.button = 'Add';
+        this.file='';
         locationForm.reset();
       },
       complete: () => {},
@@ -94,17 +109,22 @@ export class AdminlocationComponent {
   editLocation(id: number, locationForm: NgForm) {
     this.locationService.getLocationById(id).subscribe({
       next: (response: AppResponse) => {
-        let value: Location = {
+        this.value = response.data;
+        console.log("value",this.value);
+        
+
+        let formValue: Location = {
           id: response.data.id,
           address: response.data.address,
           name: response.data.name,
           campingId: parseInt(response.data.campingId),
           caravanName: response.data.caravanName,
           caravanCapacity: response.data.caravanCapacity,
+          camping:response.data.camping,
           price: response.data.price,
           stayCount: response.data.stayCount,
         };
-        locationForm.resetForm(value);
+        locationForm.resetForm(formValue);
         this.button = 'Edit';
         this.editId = response.data.id;
       },

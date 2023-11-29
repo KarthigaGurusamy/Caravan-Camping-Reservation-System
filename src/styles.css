@@ -133,6 +133,9 @@ a {
   color: var(--primary-100) !important;
   /* background-color: var(--primary-100); */
 }
+.sidebar{
+  position: fixed;
+}
 
 .nav-item:hover {
   color: var(--primary-100) !important;

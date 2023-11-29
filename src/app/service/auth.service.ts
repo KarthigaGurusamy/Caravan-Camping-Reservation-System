@@ -38,13 +38,18 @@ export class AuthService {
       .pipe(
         map((user) => {
           this.storageService.setAuthData(
-            
             window.btoa(login.username + ':' + login.password)
           );
           return user;
         })
       );
   }
+
+  getAllUsers(): Observable<AppResponse> {
+    return this.http.get<AppResponse>(
+      `${urlEndpoint.baseUrl}/admin/users/all`);
+  }
+
   register(user: AppUser): Observable<AppResponse> {
     return this.http.post<AppResponse>(
       `${urlEndpoint.baseUrl}/auth/register`,
@@ -72,18 +77,15 @@ export class AuthService {
   setLoggedIn(user: AppUser): void {
     this.storageService.setLoggedInUser(user);
     this.isLoggedInSubject.next(true);
- 
+
     let route: string | null = this.storageService.getRoute();
     if (user.role === CONSTANT.USER) {
-      if (route === null) route = "user";
-      this.router.navigate(["/" + route], { replaceUrl: true });
+      if (route === null) route = 'user';
+      this.router.navigate(['/' + route], { replaceUrl: true });
     } else if (user.role === CONSTANT.ADMIN) {
-      if (route === null) route = "admin";
+      if (route === null) route = 'admin';
       this.isAdminSubject.next(true);
-      this.router.navigate(["/" + route], { replaceUrl: true });
+      this.router.navigate(['/' + route], { replaceUrl: true });
     }
-
   }
-
-
 }

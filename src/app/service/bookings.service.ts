@@ -27,6 +27,17 @@ export class BookingsService {
     return this.httpClient.get<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/all/${user.id}`);
   }
 
+  getUserBookingDetails(user:AppUser): Observable<AppResponse> {
+
+    return this.httpClient.get<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/all/${user.id}`);
+  }
+
+  getFirstUserBookings(id:number): Observable<AppResponse> {
+
+    return this.httpClient.get<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/all/${id}`);
+  }
+ 
+
   deleteBooking(id:number) : Observable<AppResponse>{
     return this.httpClient.delete<AppResponse>(`${urlEndpoint.baseUrl}/user/bookings/delete/${id}`);
 

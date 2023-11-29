@@ -1,4 +1,4 @@
-<div class="container-fluid vh-100 ">
+<div class="container-fluid vh-100">
   <div class="row col-12 flex-grow-1 vh-100">
     <div class="sidebar col-1 p-0">
       <div class="bg-body-tertiary h-100" tabindex="-1">
@@ -60,73 +60,41 @@
         </div>
       </div>
     </div>
-    <main class="container col-10">
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card card-gradient-1">
-              <div class="card-body">
-                <h5 class="card-title">Total Campings</h5>
-                <p class="card-text">150</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="card card-gradient-2">
-              <div class="card-body">
-                <h5 class="card-title">Total Locations</h5>
-                <p class="card-text">100</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="card card-gradient-3">
-              <div class="card-body">
-                <h5 class="card-title">Total Bookings</h5>
-                <p class="card-text">300</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="card card-gradient-4">
-              <div class="card-body">
-                <h5 class="card-title">Total Earnings</h5>
-                <p class="card-text">$10,000</p>
-              </div>
-            </div>
-          </div>
+    <main class="container col-10 mt-5">
+      <p style="font-size: 20px; font-weight: bold;text-align: center;">User Details</p>
+      <div class="row col-12">
+        <div class="col-md-6">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">E-mail</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let user of users">
+              <tr *ngIf="!isAdmin(user)" (click)="getUserBookings(user)" style="cursor: pointer;">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <div class="row mt-4">
-          <div class="col-md-12">
-            <h4>Today's Bookings</h4>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Booking ID</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Customer</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Location A</td>
-                  <td>John Doe</td>
-                  <td>$50</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Location B</td>
-                  <td>Jane Doe</td>
-                  <td>$75</td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="col-md-6">
+
+          <div class="card mb-2" *ngFor="let booking of bookings">
+            <div class="card-body">
+              <p class="card-text">Id : {{booking.id}}</p>
+              <p class="card-text">Camping Name : {{booking.campingName}}</p>
+              <p class="card-text">Location : {{booking.address}}</p>
+              <p class="card-text">From Date : {{booking.fromDate}}</p>
+              <p class="card-text">To Date : {{booking.toDate}}</p>
+              <p class="card-text">Status : {{booking.status}}</p>
+            </div>
           </div>
         </div>
       </div>

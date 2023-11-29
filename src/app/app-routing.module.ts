@@ -15,6 +15,8 @@ import { StaffComponent } from './components/staff/staff.component';
 import { BookingformComponent } from './components/bookingform/bookingform.component';
 import { CampingsComponent } from './components/campings/campings.component';
 import { authGuard } from './guard/auth.guard';
+import { AdminuserdetailsComponent } from './components/adminuserdetails/adminuserdetails.component';
+import { NotloggedinComponent } from './components/notloggedin/notloggedin.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -30,7 +32,10 @@ const routes: Routes = [
   {path:'user/bookings',component:UserbookingsComponent, canActivate: [authGuard]},
   {path:'user/profile',component:UserprofileComponent, canActivate: [authGuard]},
   {path:'admin/staff',component:StaffComponent, canActivate: [authGuard]},
+  {path:'admin/user-details',component:AdminuserdetailsComponent, canActivate: [authGuard]},
   {path:'user/booking/form',component:BookingformComponent},
+  {path:'loggedin',component:NotloggedinComponent},
+
 
 ];
 

@@ -106,4 +106,11 @@ export class HomeComponent {
   isAdmin():boolean{
     return this.authService.isAdmin();
   }
+
+  validateUser():void{
+ 
+   if(!this.authService.isLoggedIn()){
+    this.router.navigate(['/loggedin'],{queryParams:{isUser:false}})
+   }
+  }
 }

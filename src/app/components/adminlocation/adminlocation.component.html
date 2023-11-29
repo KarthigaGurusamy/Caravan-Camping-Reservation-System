@@ -1,5 +1,5 @@
 <div class="container-fluid vh-100">
-  <div class="row flex-grow-1 vh-100">
+  <div class="row col-12 flex-grow-1 vh-100">
     <div class="sidebar col-1 p-0">
       <div class="bg-body-tertiary h-100" tabindex="-1">
         <div
@@ -38,6 +38,7 @@
             <li
               class="nav-item d-flex align-items-center mb-2 sideBarItem"
               title="Users"
+              routerLink="/admin/user-details"
             >
               <i class="fa-solid fa-users"></i>
             </li>
@@ -59,7 +60,7 @@
         </div>
       </div>
     </div>
-    <main class="col-10 px-4">
+    <main class="container col-11">
       <div class="container mt-5">
         <p style="font-size: 20px; font-weight: bold">Locations</p>
         <!-- <button
@@ -170,7 +171,16 @@
                   <label class="form-label" for="username"
                     >Choose Camping</label
                   >
+                  <br>
                   <select name="campingId" ngModel required>
+                    <option
+                    *ngIf="value.id > 0"
+                    value="value.id"
+                    selected
+                    
+                  >
+                    {{ value.camping.campingName }}
+                  </option>
                     <option
                       *ngFor="let camping of campingList"
                       [value]="camping.id"
@@ -394,6 +404,7 @@
                     class="input-file"
                     id="customFile"
                     ngModel
+                    name="photo"
                     (change)="onFileChange($event)"
                   />
                 </div>

@@ -12,6 +12,7 @@ export interface Location {
   price: number;
   stayCount: number;
   staff?:Staff;
+  camping:Camping;
   photo?: FileType,
   
 }
