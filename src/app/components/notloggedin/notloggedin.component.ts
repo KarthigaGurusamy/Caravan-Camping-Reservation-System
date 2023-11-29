@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -11,15 +11,13 @@ export class NotloggedinComponent {
     private activatedRouter: ActivatedRoute,
     private router: Router
   ) {}
-  ngOnInit(): void {
-    this.activatedRouter.queryParams.subscribe((param) => {
-      let isUser: boolean = param['isUser'];
-      const myModal = document.getElementById('new') as HTMLDivElement;
-      const myInput = document.getElementById('myInput') as HTMLElement;
 
-      myModal.addEventListener('shown.bs.modal', () => {
-        myInput.focus()
-      })
-    });
+  @ViewChild('open', { read: ElementRef }) closeRef!: ElementRef;
+  @ViewChild('close', { read: ElementRef }) modelRef!: ElementRef;
+
+  ngOnInit(): void {
+    this.activatedRouter.queryParams.subscribe((param) => {});
+
+    this.modelRef.nativeElement.click();
   }
 }

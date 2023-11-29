@@ -101,7 +101,14 @@
           <tbody *ngFor="let camp of campingList">
             <tr>
               <td class="col-2">{{ camp.id }}</td>
-              <td class="col-2">Image</td>
+              <td class="col-2">
+                <img
+                  src="{{
+                    'http://localhost:8080/api/home/downloadFile/' + camp.id
+                  }}"
+                  style="height: 200px; width: 200px"
+                />
+              </td>
               <td class="col-2">{{ camp.campingName }}</td>
               <td class="col-2 text-wrap">{{ camp.description }}</td>
 
@@ -223,12 +230,14 @@
                   </div>
                 </div>
                 <div class="form-outline mb-3">
-                  <label class="form-label" for="username">Photo</label>
+                  <label class="form-label" for="username">Choose Image</label>
                   <input
-                    type="text"
-                    id="username"
-                    class="form-control"
-                    placeholder="Enter photo link"
+                    type="file"
+                    class="input-file"
+                    id="customFile"
+                    ngModel
+                    name="photo"
+                    (change)="onFileChange($event)"
                   />
                 </div>
                 <div class="d-grid gap-2 mb-5">

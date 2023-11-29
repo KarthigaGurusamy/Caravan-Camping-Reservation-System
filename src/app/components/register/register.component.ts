@@ -12,20 +12,20 @@ import { AppResponse } from 'src/app/model/appResponse';
 })
 export class RegisterComponent {
 
+  register: AnimationOptions = {
+    path: '/assets/register.json',
+  };
+  error:String='';
+
   constructor(private authService:AuthService,private route:Router)
   {
 
   }
-  options: AnimationOptions = {
-    path: '/assets/register.json',
-  };
-  error:String='';
-  onSubmit(registerForm:NgForm)
-  {
+ 
+
+  onRegister(registerForm: NgForm) {
     this.authService.register(registerForm.value).subscribe({
-      next: (response: AppResponse) => {
-        this.route.navigate(['login'], {replaceUrl:true});
-      },
+      next: (response: AppResponse) => {},
       error: (err) => {
         console.log(err);
 
@@ -34,7 +34,5 @@ export class RegisterComponent {
       },
       complete: () => console.log('There are no more action happen.'),
     });
-    
-   
   }
 }

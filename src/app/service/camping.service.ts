@@ -23,8 +23,8 @@ export class CampingService {
     );
   }
 
-  addCampings(camping: Camping): Observable<AppResponse> {
-    if (camping.id === 0) {
+  addCampings(camping: FormData,id:number): Observable<AppResponse> {
+    if (id === 0) {
       return this.httpClient.post<AppResponse>(
         `${urlEndpoint.baseUrl}/admin/camping/create`,
         camping

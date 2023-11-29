@@ -16,13 +16,15 @@
 
 <section class="vh-100">
   <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
+    <div
+      class="row d-flex align-items-center justify-content-center h-100"
+    >
       <div class="col-6">
         <ng-lottie [options]="options"></ng-lottie>
       </div>
       <div class="col-6">
         <h2 class="display-4 text-primary">Login</h2>
-        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+        <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
           <div class="form-outline mb-3">
             <label class="form-label" for="username">Username</label>
             <input
@@ -34,7 +36,9 @@
               minlength="4"
               #modelUsername="ngModel"
               [ngClass]="
-                modelUsername.invalid && modelUsername.dirty ? 'is-invalid' : ''
+                modelUsername.invalid && modelUsername.dirty
+                  ? 'is-invalid'
+                  : ''
               "
             />
             <p
@@ -42,6 +46,12 @@
               class="text-danger"
             >
               Please enter valid username
+            </p>
+            <p
+              *ngIf="modelUsername?.errors?.['required'] && modelUsername.dirty"
+              class="text-danger"
+            >
+              Please enter username!
             </p>
           </div>
 
@@ -56,7 +66,9 @@
               minlength="3"
               #modelPassword="ngModel"
               [ngClass]="
-                modelPassword.invalid && modelPassword.dirty ? 'is-invalid' : ''
+                modelPassword.invalid && modelPassword.dirty
+                  ? 'is-invalid'
+                  : ''
               "
             />
             <div>
@@ -86,8 +98,9 @@
           <div class="d-flex align-items-center mb-4">
             <span>Not registered?</span>
             <a
-              routerLink="/register"
+              style="cursor: pointer"
               class="text-primary text-decoration-none px-2"
+              routerLink="/register"
               >Register here</a
             >
           </div>
@@ -100,6 +113,7 @@
             >
               Login
             </button>
+      
           </div>
         </form>
       </div>

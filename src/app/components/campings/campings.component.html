@@ -46,7 +46,7 @@
             <div class="col-md-4 mb-4" *ngFor="let camping of campingList">
               <div class="card position-relative">
                 <img
-                  src="../../../assets/images/tentcamping.jpg"
+                src="{{ 'http://localhost:8080/api/home/downloadFile/' + camping.id }}"
                   class="card-img-top"
                   alt="Card Image 1"
                   style="height: 300px"

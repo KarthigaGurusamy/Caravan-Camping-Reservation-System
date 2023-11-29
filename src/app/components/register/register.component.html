@@ -15,12 +15,12 @@
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-6">
-        <ng-lottie [options]="options"></ng-lottie>
+      <div class="col-5">
+        <ng-lottie [options]="register"></ng-lottie>
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <h2 class="display-4 text-primary">Register</h2>
-        <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+        <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
           <div class="form-outline mb-4">
             <label class="form-label" for="form3Example3">Email</label>
             <input
@@ -62,16 +62,24 @@
               ngModel
               required
               minlength="4"
-              #modelUsername="ngModel"
+              #modelUsernameRegister="ngModel"
               [ngClass]="
-                modelUsername.invalid && modelUsername.dirty ? 'is-invalid' : ''
+                modelUsernameRegister.invalid && modelUsernameRegister.dirty
+                  ? 'is-invalid'
+                  : ''
               "
             />
             <p
-              *ngIf="modelUsername.invalid && modelUsername.dirty && modelUsername?.errors?.['pattern']"
+              *ngIf="modelUsernameRegister.invalid && modelUsernameRegister.dirty && modelUsernameRegister?.errors?.['pattern']"
               class="text-danger"
             >
               Please enter valid username
+            </p>
+            <p
+              *ngIf="modelUsernameRegister?.errors?.['required'] && modelUsernameRegister.dirty"
+              class="text-danger"
+            >
+              Please enter username!
             </p>
           </div>
           <div class="form-outline mb-4">
@@ -119,21 +127,23 @@
               ngModel
               required
               minlength="3"
-              #modelPassword="ngModel"
+              #modelPasswordRegister="ngModel"
               [ngClass]="
-                modelPassword.invalid && modelPassword.dirty ? 'is-invalid' : ''
+                modelPasswordRegister.invalid && modelPasswordRegister.dirty
+                  ? 'is-invalid'
+                  : ''
               "
             />
             <div>
               <p
-                *ngIf="modelPassword?.errors?.['minlength'] && modelPassword.dirty"
+                *ngIf="modelPasswordRegister?.errors?.['minlength'] && modelPasswordRegister.dirty"
                 class="text-danger"
               >
                 Please enter minimum password of length
-                {{modelPassword?.errors?.['minlength']?.['requiredLength']}}
+                {{modelPasswordRegister?.errors?.['minlength']?.['requiredLength']}}
               </p>
               <p
-                *ngIf="modelPassword?.errors?.['required'] && modelPassword.dirty"
+                *ngIf="modelPasswordRegister?.errors?.['required'] && modelPasswordRegister.dirty"
                 class="text-danger"
               >
                 Please enter password!
@@ -155,7 +165,7 @@
               #modelConfirmPassword="ngModel"
               [ngClass]="
                 modelConfirmPassword.dirty &&
-                modelPassword.value !== modelConfirmPassword.value
+                modelPasswordRegister.value !== modelConfirmPassword.value
                   ? 'is-invalid'
                   : ''
               "
@@ -169,7 +179,7 @@
               </p>
               <p
                 *ngIf="
-                  modelPassword.value !== modelConfirmPassword.value &&
+                modelPasswordRegister.value !== modelConfirmPassword.value &&
                   modelConfirmPassword.dirty &&
                   modelConfirmPassword.value
                 "
@@ -182,8 +192,9 @@
           <div class="d-flex align-items-center mb-4">
             <span>Already registered?</span>
             <a
-              routerLink="/login"
+              style="cursor: pointer"
               class="text-primary text-decoration-none px-2"
+              routerLink="/login"
               >Login here</a
             >
           </div>
@@ -192,6 +203,7 @@
             type="submit"
             class="btn btn-primary btn-block mb-4"
             [disabled]="registerForm.invalid"
+            routerLink="/login"
           >
             Register
           </button>

@@ -13,6 +13,6 @@ export interface Location {
   stayCount: number;
   staff?:Staff;
   camping:Camping;
-  photo?: FileType,
+  photo?: FileType;
   
 }

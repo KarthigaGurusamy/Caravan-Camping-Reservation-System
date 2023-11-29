@@ -27,6 +27,8 @@ export class LocationComponent {
   toDate: String = '';
   isDateAvailable: boolean = false;
 
+  todayDate:any;
+
   lottieOptions: AnimationOptions = {
     path: 'assets/bookingsuccess.json',
     loop: true,
@@ -50,6 +52,7 @@ export class LocationComponent {
   ) {}
 
   ngOnInit(): void {
+    this.todayDate=new Date();
     this.route.queryParams.subscribe((param) => {
       let id: number = param['id'];
       console.log(id);
@@ -65,6 +68,13 @@ export class LocationComponent {
         },
       });
     });
+  }
+
+  getCurrentDate(): string {
+    const today = new Date();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    return `${today.getFullYear()}-${month}-${day}`;
   }
 
   isStaff(id: number): boolean {

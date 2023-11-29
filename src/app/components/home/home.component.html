@@ -50,8 +50,7 @@
     <div>
       <div
         class="btn login border"
-        data-bs-target="#loginFormModal"
-        data-bs-toggle="modal"
+        routerLink="/login"
         *ngIf="!loggedInUser()"
       >
         Login
@@ -101,7 +100,7 @@
     height="50px"
     style="font-size: 30px; color: #be185d"
   >
-    Hurry Up! Offers are ahead!!! Make family time with our CampZo!!!.
+    Hurry Up...! Enjoy Our campings...!!! Make family time with our CampZo...!!!
   </marquee>
 </section>
 
@@ -119,86 +118,26 @@
   </p>
   <div class="container card-section">
     <div class="row">
-      <div class="col-md-4 mb-4">
+      <div class="col-md-4 mb-4" *ngFor="let camp of campingList">
         <div class="card position-relative">
           <img
-            src="../../../assets/images/tentcamping.jpg"
+            src="{{ 'http://localhost:8080/api/home/downloadFile/' + camp.id }}"
             class="card-img-top"
             alt="Card Image 1"
             style="height: 300px"
           />
           <div class="card-overlay">
-            <p>Tent Camping</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/backpacking.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-            style="height: 300px"
-          />
-          <div class="card-overlay">
-            <p>Back Packing</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/glamping.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-            style="height: 300px"
-          />
-          <div class="card-overlay">
-            <p>Glamping</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/wildcamping.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-            style="height: 300px"
-          />
-          <div class="card-overlay">
-            <p>Wild Camping</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/bicyclecamping.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-            style="height: 300px"
-          />
-          <div class="card-overlay">
-            <p>Bicycle Camping</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/caravan.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-            style="height: 300px"
-          />
-          <div class="card-overlay">
-            <p>Caravan Camping</p>
+            <p>{{ camp.campingName }}</p>
           </div>
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-primary"  routerLink="/campings">View More</button>
+        <button class="btn btn-primary" routerLink="/campings" *ngIf="loggedInUser()">
+          View More
+        </button>
+        <button class="btn btn-primary" routerLink="/login" *ngIf="!loggedInUser()">
+          View More
+        </button>
       </div>
     </div>
   </div>
@@ -218,70 +157,24 @@
       >
         Our Locations
       </p>
-      <div class="col-md-4 mb-4">
+      <div class="col-md-4 mb-4" *ngFor="let location of locationList">
         <div class="card position-relative">
           <img
-            src="../../../assets/images/location1.jpg"
+            src="{{
+              'http://localhost:8080/api/admin/location/downloadFile/' +
+                location.id
+            }}"
             class="card-img-top"
             alt="Card Image 1"
           />
-          <div class="card-overlay">Ooty</div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/location2.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-          />
-          <div class="card-overlay">Koddaikaanal</div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/location3.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-          />
-          <div class="card-overlay">Nilagiri</div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/location4.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-          />
-          <div class="card-overlay">Yelagiri</div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/location5.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-          />
-          <div class="card-overlay">Vaalpaarai</div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card position-relative">
-          <img
-            src="../../../assets/images/location6.jpg"
-            class="card-img-top"
-            alt="Card Image 1"
-          />
-          <div class="card-overlay">Yercaud</div>
+          <div class="card-overlay">{{ location.name }}</div>
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-primary" (click)="getHomeLocations(0)">
+        <button class="btn btn-primary" (click)="getHomeLocations(0)" *ngIf="loggedInUser()">
+          View More
+        </button>
+        <button class="btn btn-primary" routerLink="/login" *ngIf="!loggedInUser()">
           View More
         </button>
       </div>
@@ -390,326 +283,3 @@
     </div>
   </div>
 </section>
-
-<!-- Modals -->
-
-<div
-  class="modal fade modal-lg"
-  id="loginFormModal"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container py-5 h-100">
-          <div
-            class="row d-flex align-items-center justify-content-center h-100"
-          >
-            <div class="col-6">
-              <ng-lottie [options]="options"></ng-lottie>
-            </div>
-            <div class="col-6">
-              <h2 class="display-4 text-primary">Login</h2>
-              <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
-                <div class="form-outline mb-3">
-                  <label class="form-label" for="username">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="username"
-                    ngModel
-                    required
-                    minlength="4"
-                    #modelUsername="ngModel"
-                    [ngClass]="
-                      modelUsername.invalid && modelUsername.dirty
-                        ? 'is-invalid'
-                        : ''
-                    "
-                  />
-                  <p
-                    *ngIf="modelUsername.invalid && modelUsername.dirty && modelUsername?.errors?.['pattern']"
-                    class="text-danger"
-                  >
-                    Please enter valid username
-                  </p>
-                </div>
-
-                <div class="form-outline mb-3">
-                  <label class="form-label" for="password">Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    ngModel
-                    required
-                    minlength="3"
-                    #modelPassword="ngModel"
-                    [ngClass]="
-                      modelPassword.invalid && modelPassword.dirty
-                        ? 'is-invalid'
-                        : ''
-                    "
-                  />
-                  <div>
-                    <p
-                      *ngIf="modelPassword?.errors?.['minlength'] && modelPassword.dirty"
-                      class="text-danger"
-                    >
-                      Please enter minimum password of length
-                      {{modelPassword?.errors?.['minlength']?.['requiredLength']}}
-                    </p>
-                    <p
-                      *ngIf="modelPassword?.errors?.['required'] && modelPassword.dirty"
-                      class="text-danger"
-                    >
-                      Please enter password!
-                    </p>
-                  </div>
-                </div>
-
-                <p
-                  class="error"
-                  [ngClass]="error.length > 0 ? 'visible' : 'invisible'"
-                >
-                  {{ error }}
-                </p>
-
-                <div class="d-flex align-items-center mb-4">
-                  <span>Not registered?</span>
-                  <a
-                    style="cursor: pointer"
-                    class="text-primary text-decoration-none px-2"
-                    data-bs-target="#exampleModalToggle2"
-                    data-bs-toggle="modal"
-                    >Register here</a
-                  >
-                </div>
-
-                <div class="d-grid gap-2">
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    [disabled]="!loginForm.valid"
-                    data-bs-dismiss="modal"
-                  >
-                    Login
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div
-  class="modal fade modal-lg"
-  id="exampleModalToggle2"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel2"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-          <div class="col-6">
-            <ng-lottie [options]="register"></ng-lottie>
-          </div>
-          <div class="col-6 me-2">
-            <h2 class="display-4 text-primary">Register</h2>
-            <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3">Email</label>
-                <input
-                  type="email"
-                  id="form3Example3"
-                  class="form-control"
-                  name="email"
-                  ngModel
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                  required
-                  email
-                  #modelEmail="ngModel"
-                  [ngClass]="
-                    modelEmail.invalid && modelEmail.dirty ? 'is-invalid' : ''
-                  "
-                />
-                <div>
-                  <p
-                    *ngIf="modelEmail.invalid && modelEmail.dirty && modelEmail?.errors?.['pattern']"
-                    class="text-danger"
-                  >
-                    Please enter valid email
-                  </p>
-                  <p
-                    *ngIf="modelEmail.dirty && modelEmail?.errors?.['required']"
-                    class="text-danger"
-                  >
-                    Please enter email
-                  </p>
-                </div>
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3">Username</label>
-                <input
-                  type="email"
-                  id="form3Example3"
-                  class="form-control"
-                  name="username"
-                  ngModel
-                  required
-                  minlength="4"
-                  #modelUsername="ngModel"
-                  [ngClass]="
-                    modelUsername.invalid && modelUsername.dirty
-                      ? 'is-invalid'
-                      : ''
-                  "
-                />
-                <p
-                  *ngIf="modelUsername.invalid && modelUsername.dirty && modelUsername?.errors?.['pattern']"
-                  class="text-danger"
-                >
-                  Please enter valid username
-                </p>
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example3">Name</label>
-                <input
-                  type="text"
-                  id="form3Example3"
-                  class="form-control"
-                  name="name"
-                  ngModel
-                  required
-                  pattern="^[a-zA-Z\- ']+$"
-                  minlength="3"
-                  #modelName="ngModel"
-                  [ngClass]="
-                    modelName.invalid && modelName.dirty ? 'is-invalid' : ''
-                  "
-                />
-                <div>
-                  <p
-                    *ngIf="modelName?.errors?.['minlength']?.['requiredLength']&& modelName.dirty && !modelName?.errors?.['pattern']"
-                    class="text-danger"
-                  >
-                    Please enter name of length
-                    {{modelName?.errors?.['minlength']?.['requiredLength'] | json}}
-                  </p>
-                  <p
-                    *ngIf="modelName?.errors?.['required'] && modelName.dirty"
-                    class="text-danger"
-                  >
-                    Please enter Name
-                  </p>
-                  <p *ngIf="modelName?.errors?.['pattern']" class="text-danger">
-                    Name should contain only alphabets
-                  </p>
-                </div>
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example4">Password</label>
-                <input
-                  type="password"
-                  id="form3Example4"
-                  class="form-control"
-                  name="password"
-                  ngModel
-                  required
-                  minlength="3"
-                  #modelPassword="ngModel"
-                  [ngClass]="
-                    modelPassword.invalid && modelPassword.dirty
-                      ? 'is-invalid'
-                      : ''
-                  "
-                />
-                <div>
-                  <p
-                    *ngIf="modelPassword?.errors?.['minlength'] && modelPassword.dirty"
-                    class="text-danger"
-                  >
-                    Please enter minimum password of length
-                    {{modelPassword?.errors?.['minlength']?.['requiredLength']}}
-                  </p>
-                  <p
-                    *ngIf="modelPassword?.errors?.['required'] && modelPassword.dirty"
-                    class="text-danger"
-                  >
-                    Please enter password!
-                  </p>
-                </div>
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example4"
-                  >Confirm Password</label
-                >
-                <input
-                  type="password"
-                  id="form3Example4"
-                  class="form-control"
-                  name="confirmpassword"
-                  ngModel
-                  required
-                  minlength="3"
-                  #modelConfirmPassword="ngModel"
-                  [ngClass]="
-                    modelConfirmPassword.dirty &&
-                    modelPassword.value !== modelConfirmPassword.value
-                      ? 'is-invalid'
-                      : ''
-                  "
-                />
-                <div>
-                  <p
-                    *ngIf="modelConfirmPassword?.errors?.['required'] && modelConfirmPassword.dirty"
-                    class="text-danger"
-                  >
-                    Please enter confirm password!
-                  </p>
-                  <p
-                    *ngIf="
-                      modelPassword.value !== modelConfirmPassword.value &&
-                      modelConfirmPassword.dirty &&
-                      modelConfirmPassword.value
-                    "
-                    class="text-danger"
-                  >
-                    Password mismatch!
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center mb-4">
-                <span>Already registered?</span>
-                <a
-                  style="cursor: pointer"
-                  class="text-primary text-decoration-none px-2"
-                  data-bs-target="#loginFormModal"
-                  data-bs-toggle="modal"
-                  >Login here</a
-                >
-              </div>
-
-              <button
-                type="submit"
-                class="btn btn-primary btn-block mb-4"
-                [disabled]="registerForm.invalid"
-                data-bs-target="#loginFormModal"
-                data-bs-toggle="modal"
-              >
-                Register
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-

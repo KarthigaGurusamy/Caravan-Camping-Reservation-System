@@ -5,29 +5,51 @@ import { AnimationOptions } from 'ngx-lottie';
 import { AppResponse } from 'src/app/model/appResponse';
 import { AppUser } from 'src/app/model/appUser';
 import { Camping } from 'src/app/model/camping';
+import { Location } from 'src/app/model/location';
 import { Login } from 'src/app/model/login';
 import { AuthService } from 'src/app/service/auth.service';
 import { CampingService } from 'src/app/service/camping.service';
+import { LocationService } from 'src/app/service/location.service';
 import { StorageService } from 'src/app/service/storage.service';
+import { CONSTANT } from 'src/app/utils/constant';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  campingList: Camping[] = [];
+  locationList: Location[] = [];
 
-  campingList : Camping[]=[];
+  username: String = '';
+  password: String = '';
+  error: String = '';
+  response: boolean = false;
 
-  constructor(private campingService : CampingService, private router:Router,private authService:AuthService,
-    private storageService: StorageService){}
+  constructor(
+    private campingService: CampingService,
+    private locationService: LocationService,
+    private router: Router,
+    private authService: AuthService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.campingService.getHomeCampings().subscribe({
       next: (response: AppResponse) => {
-        this.campingList = response.data;
+        this.campingList = response.data.slice(0, 6);
+      },
+      complete: () => {},
+      error: (error: Error) => {
+        console.log('Message:', error.message);
+        console.log('Name:', error.name);
+      },
+    });
+    this.locationService.getHomeLocations(0).subscribe({
+      next: (response: AppResponse) => {
+        this.locationList = response.data.slice(0, 6);
         console.log(this.campingList);
-        
       },
       complete: () => {},
       error: (error: Error) => {
@@ -37,80 +59,20 @@ export class HomeComponent {
     });
   }
 
-  getHomeLocations(id:number)
-  {
-    this.router.navigate(['/location'],{queryParams:{id:id}});
+  getHomeLocations(id: number) {
+    this.router.navigate(['/location'], { queryParams: { id: id } });
   }
 
-
-
-  options: AnimationOptions = {
-    path: '/assets/auth.json',
-  };
-
-  register: AnimationOptions = {
-    path: '/assets/register.json',
-  };
-
-  username:String='';
-  password:String='';
-  error:String='';
-  onLogin(loginForm:NgForm) :void
-  {    
-    let login: Login = {
-      username: loginForm.value.username,
-      password: loginForm.value.password,
-    };
-    this.authService.login(login).subscribe({
-      next: (response: AppResponse) => {
-        let user: AppUser = response.data;
-        this.authService.setLoggedIn(user);
-      },
-      error: (err) => {
-        console.log(err);
-
-        let message: String = err.error.error.message;
-        this.error = message.includes(',') ? message.split(',')[0] : message;
-      },
-      complete: () => console.log('There are no more action happen.'),
-    });
-
-  }
-
-  onRegister(registerForm:NgForm)
-  {
-    this.authService.register(registerForm.value).subscribe({
-      next: (response: AppResponse) => {
-      },
-      error: (err) => {
-        console.log(err);
-
-        let message: String = err.error.error.message;
-        this.error = message.includes(',') ? message.split(',')[0] : message;
-      },
-      complete: () => console.log('There are no more action happen.'),
-    });
-    
-   
-  }
-
-  loggedInUser():boolean{
+  loggedInUser(): boolean {
     return this.authService.isLoggedIn();
   }
-
 
   logout(): void {
     this.authService.logout();
   }
 
-  isAdmin():boolean{
+  isAdmin(): boolean {
     return this.authService.isAdmin();
   }
 
-  validateUser():void{
- 
-   if(!this.authService.isLoggedIn()){
-    this.router.navigate(['/loggedin'],{queryParams:{isUser:false}})
-   }
-  }
 }

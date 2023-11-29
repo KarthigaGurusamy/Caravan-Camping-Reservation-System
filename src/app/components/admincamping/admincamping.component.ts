@@ -11,6 +11,7 @@ import { CampingService } from 'src/app/service/camping.service';
 })
 export class AdmincampingComponent implements OnInit {
   campingList: Camping[] = [];
+  file = '';
 
   camping: Camping = {
     id: 0,
@@ -39,12 +40,19 @@ export class AdmincampingComponent implements OnInit {
 
   error: string = '';
   onSubmit(campingForm: NgForm) {
-    let camp: Camping = {
-      id: this.editId,
-      campingName: campingForm.value.campingName,
-      description: campingForm.value.description,
-    };
-    this.campingService.addCampings(camp).subscribe({
+    // let camp: Camping = {
+    //   id: this.editId,
+    //   campingName: campingForm.value.campingName,
+    //   description: campingForm.value.description,
+    // };
+
+    const formData = new FormData();
+    formData.append('photo', this.file);
+    formData.append('id', this.editId.toString());
+    formData.append('campingName', campingForm.value.campingName);
+    formData.append('description', campingForm.value.description);
+    
+    this.campingService.addCampings(formData,this.editId).subscribe({
       next: (response: AppResponse) => {
         this.campingList = response.data;
         campingForm.reset();
@@ -95,5 +103,14 @@ export class AdmincampingComponent implements OnInit {
   reset(campingForm:NgForm)
   {
     campingForm.reset();
+  }
+
+  onFileChange(event: any) {
+    const fileInput = event.target;
+    if (fileInput && fileInput.files.length > 0) {
+      this.file = fileInput.files[0];
+
+      // console.log('Selected file',this.file);
+    }
   }
 }

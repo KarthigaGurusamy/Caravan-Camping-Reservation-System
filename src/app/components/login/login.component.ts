@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 import { AppResponse } from 'src/app/model/appResponse';
 import { AppUser } from 'src/app/model/appUser';
 import { Login } from 'src/app/model/login';
 import { AuthService } from 'src/app/service/auth.service';
+import { CONSTANT } from 'src/app/utils/constant';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +15,17 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class LoginComponent {
 
-  constructor(private authService: AuthService) {}
-  options: AnimationOptions = {
-    path: '/assets/auth.json',
-  };
 
   username:String='';
   password:String='';
   error:String='';
-  onSubmit(loginForm:NgForm) :void
-  {    
+
+  constructor(private authService: AuthService,private router:Router) {}
+  options: AnimationOptions = {
+    path: '/assets/auth.json',
+  };
+
+  onLogin(loginForm: NgForm): void {
     let login: Login = {
       username: loginForm.value.username,
       password: loginForm.value.password,
@@ -31,6 +34,15 @@ export class LoginComponent {
       next: (response: AppResponse) => {
         let user: AppUser = response.data;
         this.authService.setLoggedIn(user);
+        this.error = '';
+        if (user.role === CONSTANT.ADMIN) {
+          this.router.navigate(['/admin/home'], { replaceUrl: true });
+        }
+        else 
+        {
+          this.router.navigate(['/'], { replaceUrl: true });
+
+        }
       },
       error: (err) => {
         console.log(err);
@@ -38,9 +50,9 @@ export class LoginComponent {
         let message: String = err.error.error.message;
         this.error = message.includes(',') ? message.split(',')[0] : message;
       },
-      complete: () => console.log('There are no more action happen.'),
+      complete: () => {
+        console.log('There are no more action happen.');
+      },
     });
-
   }
-
 }
