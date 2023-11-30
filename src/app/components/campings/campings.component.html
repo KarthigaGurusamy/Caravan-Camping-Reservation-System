@@ -1,73 +1,41 @@
-<div class="container-fluid vh-100">
-  <div class="row col-12 flex-grow-1 vh-100">
-    <div class="sidebar col-1 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div
-          class="d-flex flex-column justify-content-center min-vh-100 overflow-y-auto"
-        >
-          <ul class="nav d-flex flex-column align-items-center">
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              data-bs-toggle="modal"
-              data-bs-target="#searchModal"
-              style="cursor: pointer"
-              title="Search"
+<!-- <app-navbar></app-navbar> -->
+<section class="mt-5">
+  <p
+    class="mt-3"
+    style="
+      letter-spacing: 1px;
+      font-weight: bold;
+      font-size: 30px;
+      text-align: center;
+      color: #1e3a8a;
+    "
+  >
+    Our Campings
+  </p>
+  <div class="container card-section">
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let camping of campingList">
+        <div class="card position-relative">
+          <img
+          src="{{ 'http://localhost:8080/api/home/downloadFile/' + camping.id }}"
+            class="card-img-top"
+            alt="Card Image 1"
+            style="height: 300px"
+          />
+          <div class="card-overlay">
+            <button
+              class="btn btn-primary"
+              (click)="getHomeLocations(camping.id)"
             >
-            <i class="fa-solid fa-search"></i>
-            </li>
-
-            <li
-            class="nav-item d-flex align-items-center sideBarItem"
-            routerLink="/"
-            title="Back"
-          >
-            <i class="fa-solid fa-arrow-left"></i>
-          </li>
-          </ul>
+              {{ camping.campingName }}
+            </button>
+          
+          </div>
         </div>
       </div>
     </div>
-
-    <main role="main" class="container col-10 px-md-4">
-      <section class="mt-5 ms-5">
-        <p
-          class="mt-3"
-          style="
-            letter-spacing: 1px;
-            font-weight: bold;
-            font-size: 50px;
-            text-align: center;
-          "
-        >
-          Our Campings
-        </p>
-        <div class="container card-section">
-          <div class="row">
-            <div class="col-md-4 mb-4" *ngFor="let camping of campingList">
-              <div class="card position-relative">
-                <img
-                src="{{ 'http://localhost:8080/api/home/downloadFile/' + camping.id }}"
-                  class="card-img-top"
-                  alt="Card Image 1"
-                  style="height: 300px"
-                />
-                <div class="card-overlay">
-                  <button
-                    class="btn btn-primary"
-                    (click)="getHomeLocations(camping.id)"
-                  >
-                    {{ camping.campingName }}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
   </div>
-</div>
-
+</section>
 <div
   class="modal fade"
   id="searchModal"
@@ -100,6 +68,3 @@
     </div>
   </div>
 </div>
-
-
-

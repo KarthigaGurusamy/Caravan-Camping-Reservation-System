@@ -161,4 +161,5 @@ export class AdminlocationComponent {
       // console.log('Selected file',this.file);
     }
   }
+
 }

@@ -26,6 +26,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     const authData = this.storageService.getAuthData();
     const isApiUrl = !request.url.startsWith(urlEndpoint.baseUrl + "/auth");
  
+  
+    
+
     if (authData !== null && isApiUrl) {
       request = request.clone({
         setHeaders: {

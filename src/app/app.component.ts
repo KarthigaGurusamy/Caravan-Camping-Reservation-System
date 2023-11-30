@@ -41,4 +41,7 @@ export class AppComponent {
   isAdminLoggedIn():boolean{
     return this.authService.isAdmin();
   }
+  logout(): void {
+    this.authService.logout();
+  }
 }

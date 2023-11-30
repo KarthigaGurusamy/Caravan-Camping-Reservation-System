@@ -1,15 +1,13 @@
-/* .card-gradient-1 {
-  background: linear-gradient(to left,  #eff6ff, #f472b6);
-}
-
-.card-gradient-2 {
-  background: linear-gradient(to left,  #eff6ff, #f472b6);
-}
-
-.card-gradient-3 {
-  background: linear-gradient(to left,  #eff6ff, #f472b6);
-}
-
-.card-gradient-4 {
-  background: linear-gradient(to left,  #eff6ff, #f472b6);
+ /* .card-gradient-1 {
+  background: linear-gradient(to right, #3b82f6, #93c5fd);
 } */
+
+
+.card-title{
+  font-size: 25px;
+}
+
+.card-text{
+    font-size: 30px;
+    color: #1e3a8a;
+}

@@ -4,7 +4,7 @@
 >
   <a class="navbar-brand" href="#">
     <img
-      src="../../../assets/logo/campzo2.png"
+      src="../../../assets/logo/Capture.png"
       width="30"
       height="30"
       class="d-inline-block align-top"
@@ -16,14 +16,14 @@
 
 <section class="vh-100">
   <div class="container py-5 h-100">
-    <div
-      class="row d-flex align-items-center justify-content-center h-100"
-    >
+    <div class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-6">
         <ng-lottie [options]="options"></ng-lottie>
       </div>
-      <div class="col-6">
-        <h2 class="display-4 text-primary">Login</h2>
+      <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+        <p style="color: #1e3a8a; font-size: 50px; letter-spacing: 2px">
+          Login
+        </p>
         <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
           <div class="form-outline mb-3">
             <label class="form-label" for="username">Username</label>
@@ -36,9 +36,7 @@
               minlength="4"
               #modelUsername="ngModel"
               [ngClass]="
-                modelUsername.invalid && modelUsername.dirty
-                  ? 'is-invalid'
-                  : ''
+                modelUsername.invalid && modelUsername.dirty ? 'is-invalid' : ''
               "
             />
             <p
@@ -66,9 +64,7 @@
               minlength="3"
               #modelPassword="ngModel"
               [ngClass]="
-                modelPassword.invalid && modelPassword.dirty
-                  ? 'is-invalid'
-                  : ''
+                modelPassword.invalid && modelPassword.dirty ? 'is-invalid' : ''
               "
             />
             <div>
@@ -98,8 +94,7 @@
           <div class="d-flex align-items-center mb-4">
             <span>Not registered?</span>
             <a
-              style="cursor: pointer"
-              class="text-primary text-decoration-none px-2"
+              style="cursor: pointer; letter-spacing: 1px; color: #1e3a8a"
               routerLink="/register"
               >Register here</a
             >
@@ -113,7 +108,6 @@
             >
               Login
             </button>
-      
           </div>
         </form>
       </div>

@@ -1,119 +1,222 @@
-<div class="container-fluid vh-100">
-  <div class="row col-12 flex-grow-1 vh-100">
-    <div class="sidebar col-1 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div
-          class="d-flex flex-column justify-content-center p-0 pt-3 min-vh-100 overflow-y-auto"
-        >
-          <ul class="nav d-flex flex-column align-items-center">
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              routerLink="/user/home"
-              title="Home"
+
+<div class="container mt-5">
+  <p style="font-size: 30px; font-weight: bold;color: #1e3a8a;text-align: center;">Profile</p>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+            alt="avatar"
+            class="rounded-circle img-fluid"
+            style="width: 150px"
+          />
+          <h5 class="my-3">
+           @{{ getLoggedInUser().username }}
+          </h5>
+          <div class="d-flex justify-content-center mb-2">
+            <button
+              class="btn btn-secondary"
+              style="background-color: #1e3a8a"
+              data-bs-toggle="modal"
+              data-bs-target="#editModel"
+              (click)="resetProfileForm(profileForm,profile.id)"
             >
-              <i class="fa-solid fa-house"></i>
-            </li>
-         
-         
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              [routerLink]="['/user/profile']"
-              title="Profile"
-            >
-              <i class="fa-solid fa-user"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              [routerLink]="['/user/bookings']"
-              title="Bookings"
-            >
-              <i class="fa-solid fa-book"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              routerLink="/"
-              title="Back"
-            >
-              <i class="fa-solid fa-arrow-left"></i>
-            </li>
-          </ul>
+              <i
+                class="fa fa-pencil"
+                style="color: white"
+                aria-hidden="true"
+              ></i>
+              Edit Profile
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <main class="container col-10 px-4">
-      <div class="container mt-5 py-5">
-        <h3 class="mt-3 mb-3" style="text-align: center;">Profile</h3>
-
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card mb-4">
-              <div class="card-body text-center">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                  alt="avatar"
-                  class="rounded-circle img-fluid"
-                  style="width: 150px"
-                />
-                <h5 class="my-3">Username : {{ getLoggedInUser().username }}</h5>
-                <div class="d-flex justify-content-center mb-2">
-                  <i class="fa fa-pencil" aria-hidden="true"></i>
-                </div>
-              </div>
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ getLoggedInUser().name }}</p>
             </div>
           </div>
-          <div class="col-lg-8">
-            <div class="card mb-4">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Full Name</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ getLoggedInUser().name }}</p>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Email</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ getLoggedInUser().email }}</p>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Phone</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ this.profile.phoneNumber }}</p>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Date of Birth</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ this.profile.dateOfBirth }}</p>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <p class="mb-0">Gender</p>
-                  </div>
-                  <div class="col-sm-9">
-                    <p class="text-muted mb-0">{{ this.profile.gender }}</p>
-                  </div>
-                </div>
-              </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Email</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ getLoggedInUser().email }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Phone</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0" *ngIf="profile.id > 0">
+                {{ this.profile.phoneNumber }}
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Date of Birth</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0" *ngIf="profile.id > 0">
+                {{ getDate(this.profile.dateOfBirth) }}
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Gender</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0" *ngIf="profile.id > 0">
+                {{ this.profile.gender }}
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </div>
 
+<div class="row d-flex justify-content-center ms-5"  *ngIf="bookingList.length === 0">
+  <div class="col-3">
+    <ng-lottie [options]="empty"></ng-lottie>
+  </div>
+</div>
+
+<div class="ms-5 me-5 mb-5" *ngIf="bookingList.length > 0">
+  <p
+    style="
+      font-size: 30px;
+      font-weight: bold;
+      color: #1e3a8a;
+      text-align: center;
+    "
+  >
+    Bookings
+  </p>
+  <table class="table table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th class="text-center" width="1%">Id</th>
+        <th class="text-center">Camping</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">From Date</th>
+        <th class="text-center">To Date</th>
+        <th class="text-center">Payment Status</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let booking of bookingList">
+      <tr>
+        <td class="text-center">{{ booking.id }}</td>
+        <td class="text-center">{{ booking.campingName }}</td>
+        <td class="text-center">{{ booking.address }}</td>
+        <td class="text-center">{{ booking.name }}</td>
+        <td class="text-center">{{getDate(booking.fromDate)}}</td>
+        <td class="text-center">{{getDate(booking.toDate)}}</td>
+        <td class="text-center" style="color: #4d7c0f">{{ booking.status }}</td>
+        <td class="text-center">
+          <div  (click)="deleteBooking(booking.id)" style="color: #b91c1c;cursor: pointer;">
+            Cancel 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div
+  class="modal fade"
+  id="editModel"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="editProfile(profileForm,profile.id)" #profileForm="ngForm">
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number:</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phoneNumber"
+              placeholder="Enter phone number"
+              name="phoneNumber"
+              ngModel
+              required
+              pattern="^(\+91-|\+91|0)?[6789]\d{9}$"
+              #modelPhNo="ngModel"
+              [ngClass]="
+                modelPhNo.invalid && modelPhNo.dirty ? 'is-invalid' : ''
+              "
+            />
+            <p
+              *ngIf="modelPhNo.invalid && modelPhNo.dirty && modelPhNo?.errors?.['pattern']"
+              class="text-danger"
+            >
+              Please enter valid Phone number
+            </p>
+            <p
+              *ngIf="modelPhNo?.errors?.['required'] && modelPhNo.dirty"
+              class="text-danger"
+            >
+              Please enter phone number!
+            </p>
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dob"
+              [max]="getCurrentDate()"
+              name="dateOfBirth"
+              ngModel
+              required
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select class="form-control" id="gender" name="gender" ngModel>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal">Edit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 import { AppResponse } from 'src/app/model/appResponse';
 import { AppUser } from 'src/app/model/appUser';
 import { Bookings } from 'src/app/model/bookings';
@@ -19,6 +20,10 @@ export class AdminuserdetailsComponent {
     private authService: AuthService,
     private bookingService: BookingsService
   ) {}
+
+  empty: AnimationOptions = {
+    path: '/assets/empty.json',
+  };
 
   ngOnInit(): void {
     this.authService.getAllUsers().subscribe({

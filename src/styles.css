@@ -24,6 +24,14 @@
   --green-700: #4d7c0f;
   --border-radius: 25px;
 }
+.table-primary{
+  background-color: var(--secondary-100) !important;
+}
+
+.table-striped{
+  background-color: var(--primary-100) !important;
+
+}
 
 body {
   font-family: "Charis SIL", serif;
@@ -129,25 +137,38 @@ a {
 .bg-body-tertiary {
   background-color: var(--secondary-100) !important;
 }
+
+.bg-navbar-primary{
+  background-color: var(--secondary-100) !important;
+
+}
 .nav-item {
   color: var(--primary-100) !important;
   /* background-color: var(--primary-100); */
+}
+.nav-item-nav{
+  color: var(--secondary-900) !important;
 }
 .sidebar{
   position: fixed;
 }
 
+
 .nav-item:hover {
-  color: var(--primary-100) !important;
   cursor: pointer;
 }
 
 .fa-solid {
   color: var(--secondary-900) !important;
+  size: 10px;
 }
 
 .fa-solid:hover {
-  color: var(--secondary-900) !important;
+  color: var(--primary-700) !important;
+}
+
+.navbar{
+  position: absolute;
 }
 
 .nav-link,
@@ -155,10 +176,14 @@ a {
   color: inherit;
 }
 
-.sideBarActive {
-  background-color: var(--primary-500) !important;
-  color: var(--primary-100) !important;
+.sideBarActive .fa-solid{
+  color: var(--primary-700) !important;
 }
+
+.navbar:not(.sideBarActive .fa-solid){
+  color: var(--secondary-500) !important;
+}
+
 .error {
   background-color: var(--red-100);
   margin: 8px 0px;

@@ -1,103 +1,52 @@
-<div class="container-fluid vh-100">
-  <div class="row col-12 flex-grow-1 vh-100">
-    <div class="sidebar col-1 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div
-          class="d-flex flex-column justify-content-center min-vh-100 overflow-y-auto"
+<p style="font-size: 30px; font-weight: bold; color: #1e3a8a" class="mt-5">
+  User Details
+</p>
+<div class="row col-12">
+  <div class="col-md-6">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-primary">
+          <th class="text-center" width="1%">Id</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Username</th>
+          <th class="text-center">E-mail</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users">
+        <tr
+          *ngIf="!isAdmin(user)"
+          (click)="getUserBookings(user)"
+          class="users"
+          style="cursor: pointer"
         >
-          <ul class="nav d-flex flex-column align-items-center">
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              routerLink="/admin/home"
-              title="Home"
-            >
-              <i class="fa-solid fa-house"></i>
-            </li>
+          <td class="text-center">{{ user.id }}</td>
+          <td class="text-center">{{ user.name }}</td>
+          <td class="text-center">{{ user.username }}</td>
+          <td class="text-center">{{ user.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/campings']"
-              title="Campings"
-            >
-              <i class="fa-solid fa-tents"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/locations']"
-              title="Locations"
-            >
-              <i class="fa-solid fa-map-marker"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/staff']"
-              title="Staffs"
-            >
-              <i class="fa-solid fa-user"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              title="Users"
-              routerLink="/admin/user-details"
-            >
-              <i class="fa-solid fa-users"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/bookings']"
-              title="Bookings"
-            >
-              <i class="fa-solid fa-book"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center sideBarItem"
-              routerLink="/"
-              title="Back"
-            >
-              <i class="fa-solid fa-arrow-left"></i>
-            </li>
-          </ul>
-        </div>
+  <div class="col-md-6" *ngIf="bookings.length === 0" style="height: 300px;width: 300px;">
+    <ng-lottie [options]="empty"></ng-lottie>
+  </div>
+
+  <div class="col-md-6" *ngIf="bookings.length > 0">
+    <div class="card mb-2 " *ngFor="let booking of bookings">
+      <div class="card-body" style="background-color: #eff6ff">
+        <p class="card-text">Id : {{ booking.id }}</p>
+        <p class="card-text">Camping Name : {{ booking.campingName }}</p>
+        <p class="card-text">Location : {{ booking.address }}</p>
+        <p class="card-text">From Date : {{ booking.fromDate }}</p>
+        <p class="card-text">To Date : {{ booking.toDate }}</p>
+        <p class="card-text">
+          Status :
+          <span style="color: #4d7c0f; font-weight: bold">{{
+            booking.status
+          }}</span>
+        </p>
       </div>
     </div>
-    <main class="container col-10 mt-5">
-      <p style="font-size: 20px; font-weight: bold;text-align: center;">User Details</p>
-      <div class="row col-12">
-        <div class="col-md-6">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Username</th>
-                <th scope="col">E-mail</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let user of users">
-              <tr *ngIf="!isAdmin(user)" (click)="getUserBookings(user)" style="cursor: pointer;">
-                <td>{{user.id}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.email}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="col-md-6">
-
-          <div class="card mb-2" *ngFor="let booking of bookings">
-            <div class="card-body">
-              <p class="card-text">Id : {{booking.id}}</p>
-              <p class="card-text">Camping Name : {{booking.campingName}}</p>
-              <p class="card-text">Location : {{booking.address}}</p>
-              <p class="card-text">From Date : {{booking.fromDate}}</p>
-              <p class="card-text">To Date : {{booking.toDate}}</p>
-              <p class="card-text">Status : {{booking.status}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
   </div>
 </div>

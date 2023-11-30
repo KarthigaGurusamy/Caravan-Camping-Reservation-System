@@ -55,7 +55,7 @@
       >
         Login
       </div>
-      <div
+      <!-- <div
         class="btn login border"
         *ngIf="isAdmin() && loggedInUser()"
         routerLink="/admin/home"
@@ -76,7 +76,7 @@
         (click)="logout()"
       >
         Logout
-      </div>
+      </div> -->
     </div>
   </div>
 </nav>
@@ -166,6 +166,7 @@
             }}"
             class="card-img-top"
             alt="Card Image 1"
+            style="height: 300px;"
           />
           <div class="card-overlay">{{ location.name }}</div>
         </div>

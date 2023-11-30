@@ -1,25 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top ms-4 me-4 mt-4" style="position: absolute;">
+<nav
+  class="navbar navbar-expand-lg navbar-dark fixed-top ms-4 me-4 mt-4"
+  style="position: absolute"
+>
   <a class="navbar-brand" href="#">
     <img
-      src="../../../assets/logo/campzo2.png"
+      src="../../../assets/logo/Capture.png"
       width="30"
       height="30"
       class="d-inline-block align-top"
       alt="Logo"
     />
-    <span style="letter-spacing: 2px;color: #1e1b4b;"> CampZo</span>
+    <span style="letter-spacing: 2px; color: #1e1b4b"> CampZo</span>
   </a>
 </nav>
-
 
 <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-5">
+      <div class="col-6">
         <ng-lottie [options]="register"></ng-lottie>
       </div>
-      <div class="col-5">
-        <h2 class="display-4 text-primary">Register</h2>
+      <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+        <p style="color: #1e3a8a; font-size: 50px; letter-spacing: 2px">
+          Register
+        </p>
         <form (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
           <div class="form-outline mb-4">
             <label class="form-label" for="form3Example3">Email</label>
@@ -29,7 +33,7 @@
               class="form-control"
               name="email"
               ngModel
-              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
               required
               email
               #modelEmail="ngModel"
@@ -179,7 +183,7 @@
               </p>
               <p
                 *ngIf="
-                modelPasswordRegister.value !== modelConfirmPassword.value &&
+                  modelPasswordRegister.value !== modelConfirmPassword.value &&
                   modelConfirmPassword.dirty &&
                   modelConfirmPassword.value
                 "
@@ -192,21 +196,21 @@
           <div class="d-flex align-items-center mb-4">
             <span>Already registered?</span>
             <a
-              style="cursor: pointer"
-              class="text-primary text-decoration-none px-2"
+              style="cursor: pointer; letter-spacing: 1px; color: #1e3a8a"
               routerLink="/login"
               >Login here</a
             >
           </div>
 
-          <button
-            type="submit"
-            class="btn btn-primary btn-block mb-4"
-            [disabled]="registerForm.invalid"
-            routerLink="/login"
-          >
-            Register
-          </button>
+          <div class="d-grid gap-2">
+            <button
+              type="submit"
+              class="btn btn-primary btn-block mb-4"
+              [disabled]="registerForm.invalid"
+            >
+              Register
+            </button>
+          </div>
         </form>
       </div>
     </div>

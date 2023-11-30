@@ -1,33 +1,12 @@
-.navbar {
-  background-color: transparent;
-  position: absolute;
+.details-container {
+  background-color: #f8f9fa; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s ease-in-out; 
 }
 
-.navbar-brand {
-  color: #eef2ff;
-}
-
-.navbar-nav .nav-link {
-  color: #eef2ff !important;
-}
-
-.slogan {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 75px;
-  font-weight: bold;
-  color: #eef2ff;
-  letter-spacing: 3px;
-}
-
-.transition-div {
-  transition: transform 5s ease;
-}
-
-.row:hover .transition-div {
-  transform: scale(1.02);
-  opacity: 0.8;
+.details-container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 

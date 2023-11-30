@@ -1,135 +1,76 @@
-<div class="container-fluid vh-100 ">
-  <div class="row col-12 flex-grow-1 vh-100">
-    <div class="sidebar col-1 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div
-          class="d-flex flex-column justify-content-center min-vh-100 overflow-y-auto"
-        >
-          <ul class="nav d-flex flex-column align-items-center">
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              routerLink="/admin/home"
-              title="Home"
-            >
-              <i class="fa-solid fa-house"></i>
-            </li>
+<div class="mt-5 ms-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Campings</h5>
+            <div class="d-flex justify-content-between">
+              <p class="card-text mt-3">{{totalCampings}}</p>
+              <div  style="height: 75px;width: 75px;"> <ng-lottie [options]="options"></ng-lottie></div>
+            </div>  
+          </div>
+        </div>
+      </div>
 
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/campings']"
-              title="Campings"
-            >
-              <i class="fa-solid fa-tents"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/locations']"
-              title="Locations"
-            >
-              <i class="fa-solid fa-map-marker"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/staff']"
-              title="Staffs"
-            >
-              <i class="fa-solid fa-user"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              title="Users"
-              routerLink="/admin/user-details"
-            >
-              <i class="fa-solid fa-users"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center mb-5 sideBarItem"
-              [routerLink]="['/admin/bookings']"
-              title="Bookings"
-            >
-              <i class="fa-solid fa-book"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center sideBarItem"
-              routerLink="/"
-              title="Back"
-            >
-              <i class="fa-solid fa-arrow-left"></i>
-            </li>
-          </ul>
+      <div class="col-md-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Locations</h5>
+            <div class="d-flex justify-content-between">
+              <p class="card-text mt-3">{{totalLocations}}</p>
+              <div  style="height: 75px;width: 75px;"> <ng-lottie [options]="options"></ng-lottie></div>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <h5 class="card-title">Bookings</h5>
+            <div class="d-flex justify-content-between">
+              <p class="card-text mt-3">{{toatalBookings}}</p>
+              <div  style="height: 75px;width: 75px;"> <ng-lottie [options]="options"></ng-lottie></div>
+            </div> 
+          </div>
         </div>
       </div>
     </div>
-    <main class="container col-10">
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card card-gradient-1">
-              <div class="card-body">
-                <h5 class="card-title">Total Campings</h5>
-                <p class="card-text">150</p>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-md-3">
-            <div class="card card-gradient-2">
-              <div class="card-body">
-                <h5 class="card-title">Total Locations</h5>
-                <p class="card-text">100</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="card card-gradient-3">
-              <div class="card-body">
-                <h5 class="card-title">Total Bookings</h5>
-                <p class="card-text">300</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
-            <div class="card card-gradient-4">
-              <div class="card-body">
-                <h5 class="card-title">Total Earnings</h5>
-                <p class="card-text">$10,000</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-12">
-            <h4>Today's Bookings</h4>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Booking ID</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Customer</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Location A</td>
-                  <td>John Doe</td>
-                  <td>$50</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Location B</td>
-                  <td>Jane Doe</td>
-                  <td>$75</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+    <div class="row d-flex justify-content-center ms-5"  *ngIf="bookingList.length === 0">
+      <div class="col-4">
+        <ng-lottie [options]="empty"></ng-lottie>
       </div>
-    </main>
+    </div>
+
+    <div class="row">
+      <div *ngIf="bookingList.length > 0">
+        <p style="font-size: 30px; font-weight: bold; color: #1e3a8a">Bookings</p>
+        <table class="table table-striped">
+          <thead>
+            <tr class="table-primary">
+              <th class="text-center" width="1%">Id</th>
+              <th class="text-center">Camping Name</th>
+              <th class="text-center">Address</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">From Date</th>
+              <th class="text-center">To Date</th>
+              <th class="text-center">Payment Status</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let booking of bookingList">
+            <tr>
+              <td class="text-center">{{ booking.id }}</td>
+              <td class="text-center">{{ booking.campingName }}</td>
+              <td class="text-center">{{ booking.address }}</td>
+              <td class="text-center">{{ booking.name }}</td>
+              <td class="text-center">{{ getDate(booking.fromDate) }}</td>
+              <td class="text-center">{{ getDate(booking.toDate) }}</td>
+      
+              <td style="color: #4d7c0f" class="text-center">{{ booking.status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div>

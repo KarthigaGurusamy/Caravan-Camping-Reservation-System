@@ -1,7 +1,145 @@
-<app-home *ngIf=""></app-home>
-<router-outlet></router-outlet>
+<div *ngIf="!isLoggedIn">
+  <router-outlet />
+</div>
 
-<div *ngIf="loaderService.isLoading | async" class="loader">
+<!-- <div *ngIf="isLoggedIn">
+  <router-outlet />
+</div> -->
+
+<div *ngIf="isLoggedIn" class="container-fluid vh-100 d-flex flex-column">
+  <div class="row" *ngIf="!isAdmin">
+    <nav
+      class="navbar sticky-top bg-navbar-primary justify-content-between p-2 shadow"
+    >
+      <div class="navbar-brand ms-1" style="cursor: pointer">
+        <img
+          src="../../../assets/logo/Capture.png"
+          width="45"
+          height="45"
+          class="d-inline-block align-top rounded-circle"
+          alt="Logo"
+          routerLink="/campings"
+        />
+      </div>
+      <div class="navbar-nav d-flex flex-row justify-content-evenly">
+        <li
+          class="nav-item-nav me-4"
+          title="Profile"
+          routerLinkActive="sideBarActive"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link" routerLink="/user/profile"
+            ><i class="fa-solid fa-user fa-lg"></i>
+          </a>
+        </li>
+        <li class="nav-item-nav me-2" style="cursor: pointer" title="Logout">
+          <a class="nav-link" (click)="logout()"
+            ><i class="fa-solid fa-power-off fa-lg"></i
+          ></a>
+        </li>
+      </div>
+    </nav>
+  </div>
+  <div class="row" *ngIf="isAdmin">
+    <nav class="navbar sticky-top bg-navbar-primary justify-content-between">
+      <div class="navbar-brand ms-4 mt-1" style="cursor: pointer">
+        <img
+          src="../../../assets/logo/Capture.png"
+          width="45"
+          height="45"
+          class="d-inline-block align-top rounded-circle"
+          alt="Logo"
+          routerLink="/campings"
+        />
+      </div>
+      <div class="navbar-nav d-flex flex-row justify-content-evenly">
+        <li class="nav-item-nav me-4" title="Profile" style="font-size: 25px;">
+          Welcome Admin!!!
+        </li>
+        <li class="nav-item-nav me-4" style="cursor: pointer" title="Logout">
+          <a class="nav-link" (click)="logout()"
+            ><i class="fa-solid fa-power-off fa-lg"></i
+          ></a>
+        </li>
+      </div>
+    </nav>
+  </div>
+
+  <div *ngIf="isAdmin" class="row flex-grow-1">
+    <div class="sidebar col-1 p-0">
+      <div class="bg-body-tertiary h-100" tabindex="-1">
+        <div
+          class="d-flex flex-column justify-content-center p-0 pt-3 min-vh-100 overflow-y-auto"
+        >
+          <ul class="nav d-flex flex-column align-items-center">
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
+              routerLink="/admin/home"
+              routerLinkActive="sideBarActive"
+              [routerLinkActiveOptions]="{ exact: true }"
+              title="Home"
+            >
+              <i class="fa-solid fa-house fa-lg"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
+              [routerLink]="['/admin/campings']"
+              routerLinkActive="sideBarActive"
+              [routerLinkActiveOptions]="{ exact: true }"
+              title="Campings"
+            >
+              <i class="fa-solid fa-tents fa-lg"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
+              [routerLink]="['/admin/locations']"
+              routerLinkActive="sideBarActive"
+              [routerLinkActiveOptions]="{ exact: true }"
+              title="Locations"
+            >
+              <i class="fa-solid fa-location-dot fa-lg"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
+              [routerLink]="['/admin/staff']"
+              routerLinkActive="sideBarActive"
+              [routerLinkActiveOptions]="{ exact: true }"
+              title="Staffs"
+            >
+              <i class="fa-solid fa-user fa-lg"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
+              title="Users"
+              routerLink="/admin/user-details"
+              routerLinkActive="sideBarActive"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <i class="fa-solid fa-users fa-lg"></i>
+            </li>
+            <li
+              class="nav-item d-flex align-items-center mb-5 sideBarItem"
+              [routerLink]="['/admin/bookings']"
+              routerLinkActive="sideBarActive"
+              [routerLinkActiveOptions]="{ exact: true }"
+              title="Bookings"
+            >
+              <i class="fa-solid fa-book fa-lg"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <main class="container mt-5 col-10 px-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <div class="mt-5" *ngIf="!isAdmin">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- <router-outlet *ngIf="!isAdmin"></router-outlet> -->
+
+  <div *ngIf="loaderService.isLoading | async" class="loader">
     <ng-lottie [options]="options"></ng-lottie>
   </div>
-  
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 import { AppResponse } from 'src/app/model/appResponse';
 import { Bookings } from 'src/app/model/bookings';
 import { BookingsService } from 'src/app/service/bookings.service';
@@ -10,6 +11,11 @@ import { BookingsService } from 'src/app/service/bookings.service';
 })
 export class BookingsComponent {
   bookingList: Bookings[] = [];
+
+  options: AnimationOptions = {
+    path: '/assets/empty.json',
+  };
+
 
   constructor(private bookingsService: BookingsService) {}
 
@@ -25,5 +31,8 @@ export class BookingsComponent {
         console.log('Name:', error.name);
       },
     });
+  }
+  getDate(date:any):String{
+    return new Date(date).toISOString().split('T')[0];
   }
 }

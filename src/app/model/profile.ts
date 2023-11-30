@@ -3,4 +3,5 @@ export interface Profile {
   dateOfBirth: Date;
   phoneNumber: number;
   gender: String;
+  userId:number;
 }

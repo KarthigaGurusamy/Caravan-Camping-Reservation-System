@@ -1,82 +1,43 @@
-<div class="container-fluid vh-100">
-  <div class="row col-12 flex-grow-1 vh-100">
-    <div class="sidebar col-1 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div
-          class="d-flex flex-column justify-content-center p-0 pt-3 min-vh-100 overflow-y-auto"
-        >
-          <ul class="nav d-flex flex-column align-items-center">
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              routerLink="/user/home"
-              title="Home"
-            >
-              <i class="fa-solid fa-house"></i>
-            </li>
-
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              [routerLink]="['/user/profile']"
-              title="Profile"
-            >
-              <i class="fa-solid fa-user"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              [routerLink]="['/user/bookings']"
-              title="Bookings"
-            >
-              <i class="fa-solid fa-book"></i>
-            </li>
-            <li
-              class="nav-item d-flex align-items-center px-4 sideBarItem"
-              routerLink="/"
-              title="Back"
-            >
-              <i class="fa-solid fa-arrow-left"></i>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <main class="container col-10">
-      <div class="container mt-5">
-        <p style="font-size: 20px; font-weight: bold">Bookings</p>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Image</th>
-              <th scope="col">Camping Name</th>
-              <th scope="col">Address</th>
-              <th scope="col">User Name</th>
-              <th scope="col">Name</th>
-              <th scope="col">From Date</th>
-              <th scope="col">To Date</th>
-              <th scope="col">Payment Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let booking of bookingList">
-            <tr>
-              <td>{{ booking.id }}</td>
-              <td>Image</td>
-              <td>{{ booking.campingName }}</td>
-              <td>{{ booking.address }}</td>
-              <td>{{ booking.userName }}</td>
-              <td>{{ booking.name }}</td>
-              <td>{{ booking.fromDate }}</td>
-              <td>{{ booking.toDate }}</td>
-              <td style="color: green">{{ booking.status }}</td>
-              <td>
-                <div class="btn btn-danger" (click)="deleteBooking(booking.id)">
-                  Cancel Booking
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+<!-- <app-navbar></app-navbar> -->
+<div class="ms-5 me-5 mt-5">
+  <p
+    style="
+      font-size: 30px;
+      font-weight: bold;
+      color: #1e3a8a;
+      text-align: center;
+    "
+  >
+    Bookings
+  </p>
+  <table class="table table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th class="text-center" width="1%">Id</th>
+        <th class="text-center">Camping</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">From Date</th>
+        <th class="text-center">To Date</th>
+        <th class="text-center">Payment Status</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let booking of bookingList">
+      <tr>
+        <td class="text-center">{{ booking.id }}</td>
+        <td class="text-center">{{ booking.campingName }}</td>
+        <td class="text-center">{{ booking.address }}</td>
+        <td class="text-center">{{ booking.name }}</td>
+        <td class="text-center">{{getDate(booking.fromDate)}}</td>
+        <td class="text-center">{{getDate(booking.toDate)}}</td>
+        <td class="text-center" style="color: #4d7c0f">{{ booking.status }}</td>
+        <td class="text-center">
+          <div  (click)="deleteBooking(booking.id)" style="color: #b91c1c;cursor: pointer;">
+            Cancel 
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

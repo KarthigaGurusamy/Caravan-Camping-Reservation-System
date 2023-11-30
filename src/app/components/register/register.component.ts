@@ -25,7 +25,9 @@ export class RegisterComponent {
 
   onRegister(registerForm: NgForm) {
     this.authService.register(registerForm.value).subscribe({
-      next: (response: AppResponse) => {},
+      next: (response: AppResponse) => {
+        this.route.navigate(['/login'],{replaceUrl:true});
+      },
       error: (err) => {
         console.log(err);
 

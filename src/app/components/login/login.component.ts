@@ -38,6 +38,10 @@ export class LoginComponent {
         if (user.role === CONSTANT.ADMIN) {
           this.router.navigate(['/admin/home'], { replaceUrl: true });
         }
+        else if(user.role === CONSTANT.USER){
+          this.router.navigate(['/campings'], { replaceUrl: true });
+
+        }
         else 
         {
           this.router.navigate(['/'], { replaceUrl: true });

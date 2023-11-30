@@ -39,4 +39,8 @@ export class UserbookingsComponent {
       },
     });
   }
+
+  getDate(date:any):String{
+    return new Date(date).toISOString().split('T')[0];
+  }
 }

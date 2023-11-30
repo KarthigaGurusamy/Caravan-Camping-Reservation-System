@@ -21,6 +21,7 @@ export class LocationComponent {
   count: string = '';
   countArr: number[] = [];
   error: String = '';
+  success: String = '';
   numberOfPersons: number = 1;
   persons: Person[] = [];
   fromDate: String = '';
@@ -28,16 +29,6 @@ export class LocationComponent {
   isDateAvailable: boolean = false;
 
   todayDate:any;
-
-  lottieOptions: AnimationOptions = {
-    path: 'assets/bookingsuccess.json',
-    loop: true,
-    autoplay: false,
-  };
-
-  playAnimation() {
-    this.lottieOptions.autoplay = !this.lottieOptions.autoplay;
-  }
 
   options: AnimationOptions = {
     path: '/assets/success.json',
@@ -48,7 +39,8 @@ export class LocationComponent {
     private route: ActivatedRoute,
     private authService: AuthService,
     private storageService: StorageService,
-    private bookingService: BookingsService
+    private bookingService: BookingsService,
+    
   ) {}
 
   ngOnInit(): void {
@@ -112,6 +104,7 @@ export class LocationComponent {
     this.bookingService.addUserBooking(booking).subscribe({
       next: (response: AppResponse) => {
         this.error='';
+        this.success='';
         this.isDateAvailable=false;
       },
       complete: () => {},
@@ -139,7 +132,8 @@ export class LocationComponent {
         this.isDateAvailable = response.data;
 
         if (this.isDateAvailable) {
-          this.error = 'Woah..Dates are available! Click confirm to book..';
+          this.success = 'Woah..Dates are available! Click confirm to book..';
+          this.error='';
         } else {
           this.error =
             'Oops!! The dates are not available choose another date..';
@@ -169,4 +163,5 @@ export class LocationComponent {
   }
 
   submitForm(personDetails: NgForm) {}
+
 }
