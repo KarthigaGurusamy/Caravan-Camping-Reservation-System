@@ -23,7 +23,12 @@
 
 **Screenshots**
 
-    🔗 Links
+![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/05b6407b-8e2a-4da6-9a51-3346c52c39dc)
+
+![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/9e389411-9fd4-4b75-941b-3b77b2025b11)
+
+![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/e6d38931-46e2-44c2-8da1-96609ec66a1e)
+
 
 
 **Challenges**
@@ -46,18 +51,18 @@
 
 **Repository Link**
 
-    🔗 Repo link 
+🔗 [Repo link](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System) 
 
 
 **MySQL Schema**
 
-  ![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/4665601b-1cbe-45af-a2a6-178f9028e6c4)
+![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/4665601b-1cbe-45af-a2a6-178f9028e6c4)
  
 
 
 Demo Video Url
   
-    🔗 [url of demo video](https://drive.google.com/file/d/1rLvVCXfQnxBMMVxPHV7zUvvO46Uu8abX/view?usp=sharing)https://drive.google.com/file/d/1rLvVCXfQnxBMMVxPHV7zUvvO46Uu8abX/view?usp=sharing
+🔗 [url of demo video](https://drive.google.com/file/d/1rLvVCXfQnxBMMVxPHV7zUvvO46Uu8abX/view?usp=sharing)
   
   
   
