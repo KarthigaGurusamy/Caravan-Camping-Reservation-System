@@ -51,7 +51,7 @@
 
 **MySQL Schema**
 
-    ![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/4665601b-1cbe-45af-a2a6-178f9028e6c4)
+  ![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/4665601b-1cbe-45af-a2a6-178f9028e6c4)
  
 
 
