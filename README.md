@@ -56,7 +56,8 @@
 
 ➡️ **Repository Link**
 
-🔗 [Repo link](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System) 
+🔗 Front end - [Repo link](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System) 
+🔗 Back end - [Repo link](https://github.com/KarthigaGurusamy/Spring-Boot-Caravan-Camping)
 
 
 ➡️ **MySQL Schema**
