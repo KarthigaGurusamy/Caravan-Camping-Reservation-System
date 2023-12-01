@@ -38,7 +38,7 @@
 
 ➡️ **Challenges**
 
-    🔴 Faced challenges in creating and mapping the enitites.
+    🔴 Faced challenges in creating and mapping the entites.
     🔴 While integrating front end and back end for POST and PUT request.
     🔴 Uploading image to the server and downloading image from the server.
     🔴 Faced challenge for @OnetoOne mapping for duplicate datas.
