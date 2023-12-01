@@ -38,20 +38,20 @@
 
 ➡️ **Challenges**
 
-    🔴 Point one
-    🔴 Point two
-    🔴 Point three
-    🔴 Point four
-    🔴 Point five
+    🔴 Faced challenges in creating and mapping the enitites.
+    🔴 While integrating front end and back end for POST and PUT request.
+    🔴 Uploading image to the server and downloading image from the server.
+    🔴 Faced challenge for @OnetoOne mapping for duplicate datas.
+    🔴 Faced challenge in writing nested JPQL query.
 
 
 ➡️ **Hardest Errors** 
 
-    🚩 Error 1
-    🚩 Error 2
-    🚩 Error 3
-    🚩 Error 4
-    🚩 Error 5
+    🚩 Internal server error for java persisitance exception for date - Solved it by converting the date format.
+    🚩 Internal server error hibernate nested exception - Solved it by reworking on the modal mapping.
+    🚩 Internal server error for delete nested entities - Solved it by adding cascade type ALL.
+    🚩 Altering the entity and updating it.
+    🚩 Handling logic for more than 1 row found for one to one mapping.
 
 
 ➡️ **Repository Link**
