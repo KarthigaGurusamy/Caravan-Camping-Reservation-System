@@ -3,8 +3,11 @@
 
 ➡️ **Description**
 
-    👉 This caravan and camping reservation system is for users to view campings and locations. The users can check dates availability for camping location and can book camping location.
-        The user can update their profile and Add/Cancel Booking.The admin can Add/Edit/Delete campings and locations for campings and allocate staff for location also admin can view users and thier bookings.
+    👉 This caravan and camping reservation system is for users to view campings and locations. 
+    👉 The users can check dates availability for camping location and can book camping location.
+    👉 The user can update their profile and Add/Cancel Booking.
+    👉 The admin can Add/Edit/Delete campings and locations for campings and allocate staff for location also admin can view users and thier bookings.
+    👉 The datas are dynamically stored and retrived from the database.
   
 
 
