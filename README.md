@@ -1,32 +1,32 @@
 # **Caravan and Camping Reservation System**
 
 
-Description
+**Description**
 
     ➡️ Points
     ➡️ Points
     ➡️ Points 
 
 
-Credentials
+**Credentials**
 
     👉 Role 
         📧Email = "a" | 🔐Password = "a"
 
 
-Technologies used
+**Technologies used**
 
     👉 '💻-Spring Boot Java' for Back end
     👉 '💻-Angular' for Front end 
     👉 '🗃️-MySql' for Database 
 
 
-Screenshots
+**Screenshots**
 
     🔗 Links
 
 
-Challenges
+**Challenges**
 
     🔴 Point one
     🔴 Point two
@@ -35,7 +35,7 @@ Challenges
     🔴 Point five
 
 
-Hardest Errors 
+**Hardest Errors** 
 
     🚩 Error 1
     🚩 Error 2
@@ -44,12 +44,12 @@ Hardest Errors
     🚩 Error 5
 
 
-Repository Link
+**Repository Link**
 
     🔗 Repo link 
 
 
-MySQL Schema
+**MySQL Schema**
 
     👉 Image of schema 
 
