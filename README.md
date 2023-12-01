@@ -51,12 +51,13 @@
 
 **MySQL Schema**
 
-    👉 Image of schema 
+    ![image](https://github.com/KarthigaGurusamy/Caravan-Camping-Reservation-System/assets/145537707/4665601b-1cbe-45af-a2a6-178f9028e6c4)
+ 
 
 
 Demo Video Url
   
-    🔗 url of demo video
+    🔗 [url of demo video](https://drive.google.com/file/d/1rLvVCXfQnxBMMVxPHV7zUvvO46Uu8abX/view?usp=sharing)https://drive.google.com/file/d/1rLvVCXfQnxBMMVxPHV7zUvvO46Uu8abX/view?usp=sharing
   
   
   
